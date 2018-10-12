@@ -43,7 +43,7 @@ public class chatmodel
 	public void setCurrentUser(String currentUser)
 	{
 		this.currentUser = currentUser;
-		responseList.add(currentUser);
+		responseList.add(0, currentUser);
 		JOptionPane.showMessageDialog(null, "Your name is " + responseList);
 	}
 	public void setJoke(String joke)
