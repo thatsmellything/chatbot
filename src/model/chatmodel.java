@@ -11,13 +11,30 @@ public class chatmodel
 	private String joke;
 	private String content;
 	
-	ArrayList<String> responseList = new ArrayList<String>();
-	ArrayList<String> spookyList = new ArrayList<String>();
+	private ArrayList<String> responseList = new ArrayList<String>();
+	private ArrayList<String> spookyList = new ArrayList<String>();
 	
 	// Constructors
 	public chatmodel()
 	{
+		this.joke = "Why did the monkey cross the road? it was stapled to the chicken";
+		this.currentUser = new String("default user - boring!!!!");
+		this.content = new String("Empty of all content but null");
 		
+		this.responseList = new ArrayList<String>();
+		this.spookyList = new ArrayList<String>();
+	
+		buildTheLists();
+	}
+	
+	private void buildTheLists()
+	{
+		responseList.add("Hello! How are you?");
+		responseList.add("Goodbye!");
+		responseList.add("Yes!");
+		responseList.add("NO!");
+		responseList.add("What is your favorite color?");
+		responseList.add("Do you play any sports?");
 	}
 	
 	public chatmodel(String currentUser, String joke, String content)

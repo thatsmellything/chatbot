@@ -10,6 +10,7 @@ public class chatcontroller
 	//Constructor
 	public chatcontroller()
 	{
+		simpleBot = new chatmodel();
 		
 	}
 
