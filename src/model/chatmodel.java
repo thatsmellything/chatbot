@@ -35,6 +35,19 @@ public class chatmodel
 		responseList.add("NO!");
 		responseList.add("What is your favorite color?");
 		responseList.add("Do you play any sports?");
+		
+		spookyList.add("Halloween boooooooo!");
+		spookyList.add("Destroy the child!");
+		spookyList.add("Hype for swimming!");
+	}
+	
+	public String processText(String userText)
+	{
+		String output = "";
+		
+		output += "You said: "+ userText;
+		
+		return output;
 	}
 	
 	public chatmodel(String currentUser, String joke, String content)

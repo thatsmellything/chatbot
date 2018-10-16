@@ -19,7 +19,7 @@ public class chatcontroller
 		
 		chatmodel simpleBot = new chatmodel();
 		
-		String userInput = "m";
+		String userInput = "";
 		while (!userInput.equalsIgnoreCase("quit"))
 		{
 		userInput = JOptionPane.showInputDialog(null, "Type 'Quit' to end the program. Press enter to continue.");
@@ -30,9 +30,11 @@ public class chatcontroller
 		
 	}
 	
-	public String interactWithChatbot()
+	public String interactWithChatbot(String text)
 	{
-		return null;
+		String userInput = JOptionPane.showInputDialog(null, "Hi what do you want t talk about?");
+		userInput = simpleBot.processText(userInput);
+		return userInput;
 		
 	}
 
