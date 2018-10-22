@@ -1,10 +1,10 @@
-package model;
+package chat.model;
 
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class chatmodel
+public class ChatBot
 {
 	//Data members
 	private String currentUser;
@@ -15,7 +15,7 @@ public class chatmodel
 	private ArrayList<String> spookyList = new ArrayList<String>();
 	
 	// Constructors
-	public chatmodel()
+	public ChatBot()
 	{
 		this.joke = "Why did the monkey cross the road? it was stapled to the chicken";
 		this.currentUser = new String("default user - boring!!!!");
@@ -50,7 +50,7 @@ public class chatmodel
 		return output;
 	}
 	
-	public chatmodel(String currentUser, String joke, String content)
+	public ChatBot(String currentUser, String joke, String content)
 	{
 		
 	}

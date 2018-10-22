@@ -1,23 +1,27 @@
-package controller;
+package chat.controller;
 
-import model.chatmodel;
 import javax.swing.JOptionPane;
 
-public class chatcontroller
+import chat.model.ChatBot;
+import chat.tests.ChabotTest;
+import chat.tests.ControllerTest;
+
+
+public class ChatController
 {
-	private chatmodel simpleBot;
+	private ChatBot simpleBot;
 	
 	//Constructor
-	public chatcontroller()
+	public ChatController()
 	{
-		simpleBot = new chatmodel();
+		simpleBot = new ChatBot();
 		
 	}
 
 	public void start()
 	{	
 		
-		chatmodel simpleBot = new chatmodel();
+		ChatBot simpleBot = new ChatBot();
 		
 		String userInput = "";
 		while (!userInput.equalsIgnoreCase("quit"))
