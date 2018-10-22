@@ -3,7 +3,7 @@ package chat.controller;
 import javax.swing.JOptionPane;
 
 import chat.model.ChatBot;
-import chat.tests.ChabotTest;
+import chat.tests.ChatbotTest;
 import chat.tests.ControllerTest;
 
 

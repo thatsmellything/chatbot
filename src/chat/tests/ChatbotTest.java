@@ -6,16 +6,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import chat.model.Chatbot;
+import chat.model.ChatBot;
 
-public class ChabotTest
+public class ChatbotTest
 {
-	private Chatbot testedBot;
+	private ChatbotTest testedBot;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		testedBot = new Chatbot();
+		testedBot = new ChatbotTest();
 		
 	}
 
