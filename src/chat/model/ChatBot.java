@@ -85,6 +85,25 @@ public class ChatBot
 		this.content = content;
 	}
 
+	//legit
 	
+	public boolean legitamacyChecker(String input)
+	{
+		boolean isValid = true;
+		if (input == null)
+		{
+			isValid = false;
+		}
+		else if (input.equals(""))
+		{
+			isValid = false;
+		}
+		else if (input.contains("klj") || input.contains("wasdf"))
+		{
+			isValid = false;
+		}
+		return isValid;
+		
+	}
 	
 }
