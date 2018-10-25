@@ -41,5 +41,17 @@ public class ChatController
 		return userInput;
 		
 	}
+	
+	public String getChatbot()
+	{
+		return null;
+		
+	}
+	
+	public String useChatbotCheckers(String string)
+	{
+		return null;
+		
+	}
 
 }

@@ -87,7 +87,7 @@ public class ChatBot
 
 	//legit
 	
-	public boolean legitamacyChecker(String input)
+	public boolean legitimacyChecker(String input)
 	{
 		boolean isValid = true;
 		if (input == null)
