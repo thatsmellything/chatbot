@@ -45,7 +45,8 @@ public class ChatBot
 	{
 		String output = "";
 		
-		output += "You said: "+ userText;
+		output += "You said: "+ userText + "Chatbot says" ;
+		
 		
 		return output;
 	}
@@ -105,5 +106,30 @@ public class ChatBot
 		return isValid;
 		
 	}
+	
+	//Spooky tester
+	
+	public Boolean SpookyChecker(String inputContent)
+	{
+		boolean isSpooky = false;
+		if(inputContent.contains("Halloween"))
+		{
+			isSpooky = true;
+		}
+		for (String Phrase: spookyList)
+		{
+			if(inputContent.contains(Phrase))
+			{
+				isSpooky = true;
+			}
+			if(inputContent.contains("Easter"))
+			{
+				isSpooky = false;
+			}
+			return isSpooky;
+		}
+	}
+	
+	
 	
 }
