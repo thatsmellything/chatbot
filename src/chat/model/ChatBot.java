@@ -69,6 +69,15 @@ public class ChatBot
 	{
 		return content;
 	}
+	public spookyList<String>()
+	{
+		return spookyList;
+	}
+	public responseList<String>
+	{
+		
+	}
+	
 	
 	//Setters
 	public void setCurrentUser(String currentUser)
@@ -84,6 +93,10 @@ public class ChatBot
 	public void setContent(String content)
 	{
 		this.content = content;
+	}
+	public void spookyList()
+	{
+		this.spookyList = spookyList;
 	}
 
 	//legit
@@ -109,7 +122,7 @@ public class ChatBot
 	
 	//Spooky tester
 	
-	public Boolean SpookyChecker(String inputContent)
+	public Boolean spookyChecker(String inputContent)
 	{
 		boolean isSpooky = false;
 		if(inputContent.contains("Halloween"))
