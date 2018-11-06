@@ -6,27 +6,27 @@ import javax.swing.JOptionPane;
 
 public class ChatBot
 {
-	//Data members
+	// Data members
 	private String currentUser;
 	private String joke;
 	private String content;
-	
+
 	private ArrayList<String> responseList = new ArrayList<String>();
 	private ArrayList<String> spookyList = new ArrayList<String>();
-	
+
 	// Constructors
 	public ChatBot()
 	{
 		this.joke = "Why did the monkey cross the road? it was stapled to the chicken";
 		this.currentUser = new String("default user - boring!!!!");
 		this.content = new String("Empty of all content but null");
-		
+
 		this.responseList = new ArrayList<String>();
 		this.spookyList = new ArrayList<String>();
-	
+
 		buildTheLists();
 	}
-	
+
 	private void buildTheLists()
 	{
 		responseList.add("Hello! How are you?");
@@ -35,72 +35,68 @@ public class ChatBot
 		responseList.add("NO!");
 		responseList.add("What is your favorite color?");
 		responseList.add("Do you play any sports?");
-		
+
 		spookyList.add("Halloween boooooooo!");
 		spookyList.add("Destroy the child!");
 		spookyList.add("Hype for swimming!");
 	}
-	
-	public String processText(String userText)
-	{
-		String output = "";
-		
-		output += "You said: "+ userText + "Chatbot says" ;
-		
-		
-		return output;
-	}
-	
+
 	public ChatBot(String currentUser, String joke, String content)
 	{
-		
+
 	}
-	
-	//Getters
-	public String currentUser()
+
+	// Getters
+	public String getCurrentUser()
 	{
 		return currentUser;
 	}
-	public String joke()
+
+	public String getJoke()
 	{
 		return joke;
 	}
-	public String content()
+
+	public String getContent()
 	{
 		return content;
 	}
-	public spookyList<String>()
+
+	public ArrayList<String> getSpookyList()
 	{
 		return spookyList;
 	}
-	public responseList<String>
+
+	public ArrayList<String> getResponseList()
 	{
-		
+		return responseList;
 	}
-	
-	
-	//Setters
+
+	// Setters
 	public void setCurrentUser(String currentUser)
 	{
 		this.currentUser = currentUser;
 		responseList.add(0, currentUser);
 		JOptionPane.showMessageDialog(null, "Your name is " + responseList);
 	}
+
 	public void setJoke(String joke)
 	{
 		this.joke = joke;
 	}
+
 	public void setContent(String content)
 	{
 		this.content = content;
 	}
+
 	public void spookyList()
 	{
 		this.spookyList = spookyList;
 	}
 
-	//legit
-	
+	// legit
+
 	public boolean legitimacyChecker(String input)
 	{
 		boolean isValid = true;
@@ -117,32 +113,61 @@ public class ChatBot
 			isValid = false;
 		}
 		return isValid;
-		
+
 	}
-	
-	//Spooky tester
-	
+
+	// Spooky tester
+
 	public Boolean spookyChecker(String inputContent)
 	{
 		boolean isSpooky = false;
-		if(inputContent.contains("Halloween"))
+		if (inputContent.contains("Halloween"))
 		{
 			isSpooky = true;
 		}
-		for (String Phrase: spookyList)
+		for (String Phrase : spookyList)
 		{
-			if(inputContent.contains(Phrase))
+			if (inputContent.contains(Phrase))
 			{
 				isSpooky = true;
 			}
-			if(inputContent.contains("Easter"))
+			if (inputContent.contains("Easter"))
 			{
 				isSpooky = false;
 			}
-			return isSpooky;
 		}
+		return isSpooky;
 	}
-	
-	
-	
+
+	// Content checker test
+
+	public Boolean contentChecker(String text)
+	{
+		boolean hasContent = false;
+
+		if (text.equals(content))
+		{
+			hasContent = true;
+		}
+		// else if
+		{
+
+		}
+		return hasContent;
+	}
+
+	// process text
+
+	public String processText(String userText)
+	{
+		String answer = "";
+		answer += "You said:" + userText;
+		if (contentChecker(userText))
+		{
+			answer += "You said the special words.\n";
+			// Backslash n creates a new line in the text back to the user
+		}
+		return answer;
+	}
+
 }

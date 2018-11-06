@@ -81,7 +81,7 @@ public class ChatbotTest
 	@Test
 	public void testContentChecker()
 	{
-		assertTrue("The content checker should definitly find the value", testedBot.contentChecker(testedBot.getContent()));
+		assertTrue("The content checker should definitely find the value", testedBot.contentChecker(testedBot.getContent()));
 		assertFalse("The content in middle of another word is NOT the special content", testedBot.contentChecker("text" + testedBot.getContent() + "text"));
 		assertFalse("The content after another word is NOT the special content", testedBot.contentChecker("text" + testedBot.getContent()));
 		assertFalse("The content in front of another word is NOT the special content", testedBot.contentChecker(testedBot.getContent() + "text"));
