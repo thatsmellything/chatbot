@@ -35,6 +35,7 @@ public class ChatBot
 		responseList.add("NO!");
 		responseList.add("What is your favorite color?");
 		responseList.add("Do you play any sports?");
+		responseList.add()
 
 		spookyList.add("Halloween boooooooo!");
 		spookyList.add("Destroy the child!");
@@ -160,14 +161,17 @@ public class ChatBot
 
 	public String processText(String userText)
 	{
-		String answer = "";
-		answer += "You said:" + userText;
+		String output;
+		int randomIndex = (int)(Math.random()*responseList.size());
+		output += "You said:" + userText;
+		output += "\n chatbot says: " + responseList.get(randomIndex);
 		if (contentChecker(userText))
 		{
-			answer += "You said the special words.\n";
+			output += "You said the special words.\n";
 			// Backslash n creates a new line in the text back to the user
 		}
-		return answer;
+		
+		return output;
 	}
 
 }
