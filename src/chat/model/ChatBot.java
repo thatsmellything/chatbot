@@ -1,12 +1,14 @@
 package chat.model;
 
 import java.util.ArrayList;
-
+import chat.view.*;
 import javax.swing.JOptionPane;
 
 public class ChatBot
 {
 	// Data members
+	private ChatPanel appLayout;
+	private ChatFrame appFrame;
 	private String currentUser;
 	private String joke;
 	private String content;
@@ -23,9 +25,14 @@ public class ChatBot
 
 		this.responseList = new ArrayList<String>();
 		this.spookyList = new ArrayList<String>();
-
+		
+		this.appFrame = new ChatFrame(this);
+		this.appLayout = new ChatPanel(this);
+		
 		buildTheLists();
 	}
+	
+	
 
 	private void buildTheLists()
 	{
@@ -35,7 +42,7 @@ public class ChatBot
 		responseList.add("NO!");
 		responseList.add("What is your favorite color?");
 		responseList.add("Do you play any sports?");
-		responseList.add()
+		responseList.add("");
 
 		spookyList.add("Halloween boooooooo!");
 		spookyList.add("Destroy the child!");
@@ -161,7 +168,7 @@ public class ChatBot
 
 	public String processText(String userText)
 	{
-		String output;
+		String output = null;
 		int randomIndex = (int)(Math.random()*responseList.size());
 		output += "You said:" + userText;
 		output += "\n chatbot says: " + responseList.get(randomIndex);
