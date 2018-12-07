@@ -34,6 +34,41 @@ public class ChatPanel extends JPanel
 	
 	private void setupListeners()
 	{
-		
+		chatButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent Click)
+			{
+				
+			}
+		});
+		resetButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent Click)
+			{
+				
+			}
+		});
+		checkerButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent Click)
+			{
+				
+			}
+		});
+		saveButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent Click)
+			{
+				
+			}
+		});
+		myButton1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent Click)
+			{
+				
+			}
+		});
+		myButton1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent Click)
+			{
+				
+			}
+		});
 	}
 }
