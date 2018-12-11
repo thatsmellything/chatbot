@@ -53,6 +53,28 @@ public class ChatController
 		
 	}
 	
+	private void close()
+	{
+		System.exit(0);
+		
+	}
+	
+	public void handleErrors(Exception error)
+	{
+		
+		JOptionPane.showMessageDialog(appFrame, error.getMessage);
+	}
+	
+	public Chatframe getAppFrame()
+	{
+		return appFrame;
+	}
+	
+	public Chatbot getChatbot()
+	{
+		return simpleBot;
+	}
+	
 
 	
 	

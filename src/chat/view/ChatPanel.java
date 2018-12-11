@@ -2,9 +2,12 @@ package chat.view;
 
 import javax.swing.*;
 import chat.controller.ChatController;
+import chat.controller.IOController;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import chat,controller.IOController;
 
 public class ChatPanel extends JPanel
 {
@@ -55,7 +58,10 @@ public class ChatPanel extends JPanel
 		saveButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent Click)
 			{
-				
+				String chatText = chatArea.getText();
+				String path = "~/Documents";
+				IOController.saveText(appController,  path,  chatText);
+				chatArea.setText("Chat saved!");
 			}
 		});
 		myButton1.addActionListener(new ActionListener(){
