@@ -27,7 +27,34 @@ public class ChatPanel extends JPanel
 	
 	private void setupPanel()
 	{
+		this.setLayout(appLayout);
+		this.add(chatButton);
 		
+	}
+	
+	private String getPath(String choice)
+	{
+		String path = ".";
+		int result = -99;
+		JFileChooser fileChooser = new JFileChooser();
+		if(choice.equals("save"))
+		{
+			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			result = fileChooser.showSaveDialog(this);
+			if(result == JFileChooser.APPROVE_OPTION)
+			{
+				path = fileChooser.getCurrentDirectory().getAbsolutePath();
+			}
+		}
+		else
+		{
+			result = fileChooser.showOpenDialog(this);
+			if(result == JFileChooser.APPROVE_OPTION)
+			{
+				path = fileChooser.getSelectedFile().getAbsolutePath();
+			}
+		}
+		return path;
 	}
 	
 	private void setupLayout()
@@ -77,4 +104,6 @@ public class ChatPanel extends JPanel
 			}
 		});
 	}
+	
+	
 }
