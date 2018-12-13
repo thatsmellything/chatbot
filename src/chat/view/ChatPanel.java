@@ -86,15 +86,17 @@ public class ChatPanel extends JPanel
 			public void actionPerformed(ActionEvent Click)
 			{
 				String chatText = chatArea.getText();
-				String path = "~/Documents";
+				String path = getPath("save");
 				IOController.saveText(appController,  path,  chatText);
 				chatArea.setText("Chat saved!");
 			}
 		});
-		myButton1.addActionListener(new ActionListener(){
+		loadButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent Click)
 			{
-				
+				String path = getPath("load");
+				String chatText = IOController.loadFile(appController, path);
+				chatArea.setText(chatText);
 			}
 		});
 		myButton1.addActionListener(new ActionListener(){
