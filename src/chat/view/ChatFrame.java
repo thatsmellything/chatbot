@@ -7,7 +7,7 @@ public class ChatFrame extends JFrame
 	private GUIController appController;
 	private Panel appPanel;
 	
-	public Frame(GUIController appCOntroller)
+	public ChatFrame(GUIController appCOntroller)
 	{
 		super();
 		this.appController = appController;

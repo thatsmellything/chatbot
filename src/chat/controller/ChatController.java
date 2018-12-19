@@ -42,15 +42,29 @@ public class ChatController
 		return output;
 		
 	}
-	public String useChatbotCheckers(String text)
-	{
-		return null;
-	}
 	
 	public String getChatbot()
 	{
 		return null;
 		
+	}
+	
+	public String useChatbotCheckers(String text)
+	{
+		String testedValues = "The following checkers passed:";
+				if(simpleBot.contentChecker(text))
+				{
+					testedValues += "\nContent Checker";
+				}
+		if(simpleBot.spookyChecker(text))
+		{
+			testedValues += "\nSpooky Checker Happy Halloween";
+		}
+		if(simpleBot.validityChecker(text))
+		{testedValues += "\nEverything is valid";
+			
+		}
+		return testedValues;
 	}
 	
 	private void close()
@@ -62,7 +76,7 @@ public class ChatController
 	public void handleErrors(Exception error)
 	{
 		
-		JOptionPane.showMessageDialog(appFrame, error.getMessage);
+		JOptionPane.showMessageDialog(appFrame, error.getMessage());
 	}
 	
 	public Chatframe getAppFrame()

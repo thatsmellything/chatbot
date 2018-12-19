@@ -181,4 +181,12 @@ public class ChatBot
 		return output;
 	}
 
+
+
+	public boolean validityChecker(String text)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

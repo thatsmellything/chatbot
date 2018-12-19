@@ -96,7 +96,7 @@ public class ChatPanel extends JPanel
 			{
 				String path = getPath("load");
 				String chatText = IOController.loadFile(appController, path);
-				chatArea.setText(chatText);
+				chatArea.setText(chatText)
 			}
 		});
 		myButton1.addActionListener(new ActionListener(){
