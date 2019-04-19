@@ -6,16 +6,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import chat.model.ChatBot;
+import chat.model.Chatbot;
 
 public class ChatbotTest
 {
-	private ChatbotTest testedBot;
+	private Chatbot testedBot;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		testedBot = new ChatbotTest();
+		testedBot = new Chatbot();
 		
 	}
 
@@ -75,13 +75,13 @@ public class ChatbotTest
 		assertFalse("Null should return false", testedBot.legitimacyChecker(null));
 		assertFalse("Empty string should return false", testedBot.legitimacyChecker(""));
 		assertFalse("Keyboard mash should return false", testedBot.legitimacyChecker("asdfghjkl"));
-		assertTrue("Strings more than 1 letter should return true", testedBot.legitimacyChecker("a"));
+		assertTrue("Strings more than 1 letter should return true", testedBot.legitimacyChecker("aa"));
 	}
 
 	@Test
 	public void testContentChecker()
 	{
-		assertTrue("The content checker should definitely find the value", testedBot.contentChecker(testedBot.getContent()));
+		assertTrue("The content checker should definitly find the value", testedBot.contentChecker(testedBot.getContent()));
 		assertFalse("The content in middle of another word is NOT the special content", testedBot.contentChecker("text" + testedBot.getContent() + "text"));
 		assertFalse("The content after another word is NOT the special content", testedBot.contentChecker("text" + testedBot.getContent()));
 		assertFalse("The content in front of another word is NOT the special content", testedBot.contentChecker(testedBot.getContent() + "text"));
@@ -111,10 +111,4 @@ public class ChatbotTest
 		assertTrue("The spookyList is not properly built by the constructor", testedBot.getSpookyList().size() > 8);
 	}
 
-	
-	
-	
-	
-	
-	
 }

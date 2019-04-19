@@ -4,14 +4,14 @@ import chat.controller.ChatController;
 public class ChatFrame extends JFrame
 {
 
-	private GUIController appController;
-	private Panel appPanel;
+	private ChatController app;
+	private ChatPanel appPanel;
 	
-	public ChatFrame(GUIController appCOntroller)
+	public ChatFrame(ChatController appCOntroller)
 	{
 		super();
-		this.appController = appController;
-		this.appPanel = new Panel(appController);
+		this.app = app;
+		this.appPanel = new ChatPanel(app);
 		setupFrame();
 		
 	}
@@ -19,9 +19,9 @@ public class ChatFrame extends JFrame
 	private void setupFrame()
 	{
 		this.setContentPane(appPanel);
-		this.setTitle("Chatbot GUI");
+		this.setTitle("Chatbot GUI and Twitter 3.0");
 		this.setSize(800, 800);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 }

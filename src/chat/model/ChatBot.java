@@ -1,192 +1,202 @@
 package chat.model;
 
 import java.util.ArrayList;
-import chat.view.*;
-import javax.swing.JOptionPane;
 
-public class ChatBot
+public class Chatbot
 {
-	// Data members
-	private ChatPanel appLayout;
-	private ChatFrame appFrame;
+	// Data Members
 	private String currentUser;
 	private String joke;
 	private String content;
-
-	private ArrayList<String> responseList = new ArrayList<String>();
-	private ArrayList<String> spookyList = new ArrayList<String>();
-
-	// Constructors
-	public ChatBot()
+	
+	private ArrayList<String> responseList;
+	private ArrayList<String> spookyList;
+	
+	public Chatbot()
 	{
-		this.joke = "Why did the monkey cross the road? it was stapled to the chicken";
-		this.currentUser = new String("default user - boring!!!!");
-		this.content = new String("Empty of all content but null");
-
-		this.responseList = new ArrayList<String>();
+		// Constructors
+		this.currentUser = new String("Craig Johnson");
+		this.content = new String("A lonely tumbleweed blows across the land as the crickets chirp through the empty wind.");
+		this.joke = "What's the deal with airline food?";
+		
+		// Reply Lists
+		this.responseList = new ArrayList<String>(15);
 		this.spookyList = new ArrayList<String>();
 		
-		this.appFrame = new ChatFrame(this);
-		this.appLayout = new ChatPanel(this);
+		buildLists();
 		
-		buildTheLists();
 	}
 	
-	
-
-	private void buildTheLists()
+	private void buildLists()
 	{
-		responseList.add("Hello! How are you?");
+//		responseList
+		// Greetings
+		responseList.add("Hello!");
+		responseList.add("Good day!");
+		responseList.add("How are you?");
+		responseList.add("What's up?");
+		responseList.add("Hallo!");
+		responseList.add("Wie geht's?");
+		// Farewells
 		responseList.add("Goodbye!");
-		responseList.add("Yes!");
-		responseList.add("NO!");
-		responseList.add("What is your favorite color?");
-		responseList.add("Do you play any sports?");
-		responseList.add("");
-
-		spookyList.add("Halloween boooooooo!");
-		spookyList.add("Destroy the child!");
-		spookyList.add("Hype for swimming!");
+		responseList.add("C'ya!");
+		responseList.add("Tschüss!");
+		// Confirm
+		responseList.add("Yes.");
+		responseList.add("Sure!");
+		responseList.add("Naturally.");
+		responseList.add("Ja.");
+		// Deny
+		responseList.add("No.");
+		responseList.add("Negative.");
+		responseList.add("Not a chance.");
+		responseList.add("Nein.");
+		
+//		spookyList
+		spookyList.add("Halloween");
+		spookyList.add("spooky");
+		spookyList.add("Th-Th-Th-The S-S-Scissorman! NOT THE SCISSORMAN!");
+		spookyList.add("It's close to midnight... a-something evil's lurking in the dark.");
+		spookyList.add("And then there were none!");
+		spookyList.add("Do you want to play a game?");
+		spookyList.add("He did the Monster Mash...");
+		spookyList.add("...It was a Graveyard Smash.");
+		spookyList.add("You'll float too!");
+		spookyList.add("All work and no play makes Jack a dull boy.");
+		
 	}
-
-	public ChatBot(String currentUser, String joke, String content)
+	
+	public String processText(String userText)
 	{
-
+		String text = "";
+		
+		if(userText == null)
+		{
+			text += "null!\n";
+		}
+		else
+		{
+			text += "You said: " + userText + "\n";
+			
+			if(contentChecker(userText))
+			{
+				text += "You said the special words!\n";
+			}
+			int randomIndex = (int)(Math.random() * responseList.size());
+			text += "Chatbot says: " + responseList.get(randomIndex) + "\n";
+		}
+		
+		return text;
 	}
-
+	
+	public boolean contentChecker(String hasInput)
+	{
+		Boolean goodContent = false;
+		
+		if(legitimacyChecker(hasInput) && hasInput.equals(content))
+		{
+			goodContent = true;
+		}
+		else if(hasInput.contains(" " + content + " "))
+		{
+			goodContent = true;
+		}
+		else
+		{
+			goodContent = false;
+		}
+		
+		return goodContent;
+	
+	}
+	
+	public boolean spookyChecker(String input)
+	{
+		Boolean isSpooky = false;
+		
+		if(input.contains("Halloween"))
+		{
+			isSpooky = true;
+		}
+		
+		for(String phrase : spookyList)
+		{
+			if(input.contains(phrase))
+			{
+				isSpooky = true;
+			}
+			if(input.contains("Easter"))
+			{
+				isSpooky = false;
+			}
+		}
+		
+		return isSpooky;
+	}
+	// Props to Brian for the framework of spookyChecker. Thanks Brian!
+	
+	public Chatbot(String content)
+	{
+		this.content = content;
+	}
+	
+	public boolean legitimacyChecker(String text)
+	{
+		boolean isValid = false;
+		
+		if (text != null || text.length() > 3) 
+		{
+			isValid = true;
+		}
+		else
+		{
+			isValid = false;
+		}
+		
+		return isValid;
+	}
+	
 	// Getters
 	public String getCurrentUser()
 	{
 		return currentUser;
 	}
-
 	public String getJoke()
 	{
 		return joke;
 	}
-
 	public String getContent()
 	{
 		return content;
 	}
-
-	public ArrayList<String> getSpookyList()
-	{
-		return spookyList;
-	}
-
 	public ArrayList<String> getResponseList()
 	{
 		return responseList;
 	}
-
-	// Setters
-	public void setCurrentUser(String currentUser)
+	public ArrayList<String> getSpookyList()
 	{
-		this.currentUser = currentUser;
-		responseList.add(0, currentUser);
-		JOptionPane.showMessageDialog(null, "Your name is " + responseList);
+		return spookyList;
 	}
-
+		
+	// Setters
+	public void setCurrentUser(String name)
+	{
+		this.currentUser = name;
+	}
 	public void setJoke(String joke)
 	{
 		this.joke = joke;
 	}
-
 	public void setContent(String content)
 	{
 		this.content = content;
 	}
-
-	public void spookyList()
+	public void setResponseList(ArrayList<String> responseList)
+	{
+		this.responseList = responseList;
+	}
+	public void setSpookyList(ArrayList<String> spookyList)
 	{
 		this.spookyList = spookyList;
 	}
-
-	// legit
-
-	public boolean legitimacyChecker(String input)
-	{
-		boolean isValid = true;
-		if (input == null)
-		{
-			isValid = false;
-		}
-		else if (input.equals(""))
-		{
-			isValid = false;
-		}
-		else if (input.contains("klj") || input.contains("wasdf"))
-		{
-			isValid = false;
-		}
-		return isValid;
-
-	}
-
-	// Spooky tester
-
-	public Boolean spookyChecker(String inputContent)
-	{
-		boolean isSpooky = false;
-		if (inputContent.contains("Halloween"))
-		{
-			isSpooky = true;
-		}
-		for (String Phrase : spookyList)
-		{
-			if (inputContent.contains(Phrase))
-			{
-				isSpooky = true;
-			}
-			if (inputContent.contains("Easter"))
-			{
-				isSpooky = false;
-			}
-		}
-		return isSpooky;
-	}
-
-	// Content checker test
-
-	public Boolean contentChecker(String text)
-	{
-		boolean hasContent = false;
-
-		if (text.equals(content))
-		{
-			hasContent = true;
-		}
-		// else if
-		{
-
-		}
-		return hasContent;
-	}
-
-	// process text
-
-	public String processText(String userText)
-	{
-		String output = null;
-		int randomIndex = (int)(Math.random()*responseList.size());
-		output += "You said:" + userText;
-		output += "\n chatbot says: " + responseList.get(randomIndex);
-		if (contentChecker(userText))
-		{
-			output += "You said the special words.\n";
-			// Backslash n creates a new line in the text back to the user
-		}
-		
-		return output;
-	}
-
-
-
-	public boolean validityChecker(String text)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

@@ -1,100 +1,67 @@
 package chat.controller;
 
+import chat.model.Chatbot;
+import chat.view.ChatFrame;
 import javax.swing.JOptionPane;
 
-import chat.model.ChatBot;
-import chat.tests.ChatbotTest;
-import chat.tests.ControllerTest;
-
-
-public class ChatController
+public class ChatController 
 {
-	private ChatBot simpleBot;
-	
-	//Constructor
-	public ChatController()
+	private Chatbot simpleBot;
+	private ChatFrame appFrame;
+
+	public ChatController() 
 	{
-		simpleBot = new ChatBot();
+		// Init the model before the view!
+		simpleBot = new Chatbot();
+		appFrame = new ChatFrame(this);
+	}
+
+	public void start() 
+	{
 		
 	}
 
-	public void start()
-	{	
-		
-		
-		
-		String userInput = "";
-		while (!userInput.equalsIgnoreCase("quit"))
-		{
-		userInput = interactWithChatbot(userInput);
-		simpleBot.setCurrentUser(userInput);
-		}
-		
-		
-	}
-	
-	public String interactWithChatbot(String text)
+	public String interactWithChatbot(String text) 
 	{
 		String output = "";
-		String userInput = JOptionPane.showInputDialog(null, "Hi what do you want t talk about?");
-		String userResponse = null;
-		userInput = simpleBot.processText(userResponse);
+		output += simpleBot.processText(text);
 		return output;
-		
 	}
-	
-	public String getChatbot()
+
+	public String useChatbotCheckers(String text) 
 	{
-		return null;
+		String content = "The following checkers passed:";
 		
-	}
-	
-	public String useChatbotCheckers(String text)
-	{
-		String testedValues = "The following checkers passed:";
-				if(simpleBot.contentChecker(text))
-				{
-					testedValues += "\nContent Checker";
-				}
+		if(simpleBot.contentChecker(text)) 
+		{
+			content += "\nContent Checker";
+		}
 		if(simpleBot.spookyChecker(text))
 		{
-			testedValues += "\nSpooky Checker Happy Halloween";
+			content += "\n Spooky Checker Happy Halloween";
 		}
-		if(simpleBot.validityChecker(text))
-		{testedValues += "\nEverything is valid";
-			
-		}
-		return testedValues;
+		
+		return content;
 	}
 	
 	private void close()
 	{
 		System.exit(0);
-		
 	}
 	
 	public void handleErrors(Exception error)
 	{
-		
 		JOptionPane.showMessageDialog(appFrame, error.getMessage());
 	}
 	
-	public Chatframe getAppFrame()
+	public ChatFrame getAppFrame()
 	{
 		return appFrame;
 	}
 	
-	public Chatbot getChatbot()
+	public Chatbot getChatbot() 
 	{
 		return simpleBot;
 	}
 	
-
-	
-	
-	
-	
 }
-
-
-
