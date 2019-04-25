@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.*;
+import java.nio.file.*;
 
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -138,7 +139,7 @@ public class ChatTwitter
 	private String [] createIgnoredWordArray()
 	{
 		String [] boringWords;
-		String fileText = IOController.loadFromFile(app, "commonWords.txt");
+		String fileText = IOController.loadFile(app, "commonWords.txt");
 		int wordCount = 0;
 		
 		Scanner wordScanner = new Scanner(fileText);
