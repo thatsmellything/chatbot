@@ -139,10 +139,10 @@ public class ChatTwitter
 	private String [] createIgnoredWordArray()
 	{
 		String [] boringWords;
-		String fileText = IOController.loadFile(app, "commonWords.txt");
+		// String fileText = IOController.loadFile(app, "commonWords.txt");
 		int wordCount = 0;
 		
-		Scanner wordScanner = new Scanner(fileText);
+		Scanner wordScanner = new Scanner(this.getClass().getResourceAsStream("data/commonWords.txt"));
 		
 		while(wordScanner.hasNextLine())
 		{
