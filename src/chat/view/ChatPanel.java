@@ -224,6 +224,25 @@ public class ChatPanel extends JPanel
 				chatArea.setText("");
 			}
 		});
+		
+		tweetButton.addActionListener(new ActionListener()
+				{
+			public void actionPerformed(ActionEvent tweetClick)
+			{
+				String textToTweet = chatField.getText().trim();
+				appController.tweet(textToTweet);
+			}
+			});
+		
+		searchTwitterButton.addActionlistener(new ActionListener()
+				{
+			public void actionPerformed(ActionEvent searchClick)
+			{
+				String username = chatField.getText().trim();
+				String display = appController.findWords(username);
+				chatArea.append("\n\n" + display);
+			}
+				});
 	}
 	
 	private void setupScrollPane()
