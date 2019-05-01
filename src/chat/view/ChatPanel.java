@@ -1,31 +1,28 @@
 package chat.view;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.*;
 
 import javax.swing.*;
 import chat.controller.ChatController;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import chat.controller.IOController;
 
 public class ChatPanel extends JPanel
 {
-	private ChatController appController;
-	private SpringLayout appLayout;
+	private JTextField chatField;
 	private JButton chatButton;
 	private JButton checkerButton;
-	private JButton loadButton;
-	private JButton saveButton;
-	private JButton resetButton;
+	private JButton loadingButton;
+	private JButton savingButton;
 	private JButton tweetButton;
-	private JButton searchButton;
-	private JTextField chatField;
+	private JButton searchTwitterButton;
+	private SpringLayout appLayout;
+	private SpringLayout appLayout_1;
+	private ChatController appController;
 	private JTextArea chatArea;
 	private JScrollPane chatPane;
+	private JButton resetButton;
 	private JPanel buttonPanel;
-	
-	
 	private ImageIcon saveIcon;
 	private ImageIcon loadIcon;
 	private ImageIcon chatIcon;
@@ -33,101 +30,147 @@ public class ChatPanel extends JPanel
 	private ImageIcon checkerIcon;
 	private ImageIcon searchIcon;
 	
-	
-	
-	
 	public ChatPanel(ChatController appController)
 	{
 		super();
+		
 		this.appController = appController;
-		// Spring Layout
 		appLayout = new SpringLayout();
 		
-		saveIcon = new ImageIcon(getClass().getResource("/chatbot/view/images/save.png"));
-		loadIcon = new ImageIcon(getClass().getResource("/chatbot/view/images/load.png"));
-		chatIcon = new ImageIcon(getClass().getResource("/chatbot/view/images/chat.png"));
-		tweetIcon = new ImageIcon(getClass().getResource("/chatbot/view/images/tweet.png"));
-		checkerIcon = new ImageIcon(getClass().getResource("/chatbot/view/images/checker.png"));
-		searchIcon = new ImageIcon(getClass().getResource("/chatbot/view/images/search.png"));
+		saveIcon = new ImageIcon(getClass().getResource("/chat/view/images/save.png"));
+		loadIcon = new ImageIcon(getClass().getResource("/chat/view/images/load.png"));
+		chatIcon = new ImageIcon(getClass().getResource("/chat/view/images/chat.png"));
+		tweetIcon = new ImageIcon(getClass().getResource("/chat/view/images/tweet.png"));
+		checkerIcon = new ImageIcon(getClass().getResource("/chat/view/images/search.png"));
+		searchIcon = new ImageIcon(getClass().getResource("/chat/view/images/searchTwitter.png"));
+
 		
-		saveButton = new JButton("Save", saveIcon);
-		loadButton = new JButton("Load", loadIcon);
+		
+		this.appController = appController;
+		appLayout_1 = new SpringLayout();
+//		
+		savingButton = new JButton("Save", saveIcon);
+		loadingButton = new JButton("Load", loadIcon);
 		chatButton = new JButton("Chat", chatIcon);
-		tweetButton = new JButton("Tweet", tweetIcon);
-		checkerButton = new JButton("Checker", checkerIcon);
-		searchButton = new JButton("Search", searchIcon);
-		
-		// Buttons
-		chatButton = new JButton("Chat");
-		
-		checkerButton = new JButton("Check Text");
-		appLayout.putConstraint(SpringLayout.NORTH, chatButton, 0, SpringLayout.NORTH, checkerButton);
-		appLayout.putConstraint(SpringLayout.WEST, chatButton, 28, SpringLayout.EAST, checkerButton);
-		appLayout.putConstraint(SpringLayout.EAST, checkerButton, -498, SpringLayout.EAST, this);
-		appLayout.putConstraint(SpringLayout.SOUTH, checkerButton, -39, SpringLayout.SOUTH, this);
-		
-		loadButton = new JButton("Load");
-		appLayout.putConstraint(SpringLayout.SOUTH, chatButton, 0, SpringLayout.SOUTH, loadButton);
-		appLayout.putConstraint(SpringLayout.SOUTH, loadButton, -207, SpringLayout.SOUTH, this);
-		appLayout.putConstraint(SpringLayout.EAST, loadButton, -768, SpringLayout.EAST, this);
-		
-		saveButton = new JButton("Save");
-		appLayout.putConstraint(SpringLayout.WEST, loadButton, 6, SpringLayout.EAST, saveButton);
-		appLayout.putConstraint(SpringLayout.EAST, saveButton, -874, SpringLayout.EAST, this);
-		// saveButton
-		appLayout.putConstraint(SpringLayout.SOUTH, saveButton, -207, SpringLayout.SOUTH, this);
-		
-		resetButton = new JButton("Reset");
-		appLayout.putConstraint(SpringLayout.WEST, checkerButton, 356, SpringLayout.EAST, resetButton);
-		appLayout.putConstraint(SpringLayout.SOUTH, resetButton, -207, SpringLayout.SOUTH, this);
-		appLayout.putConstraint(SpringLayout.EAST, resetButton, -662, SpringLayout.EAST, this);
-		appLayout.putConstraint(SpringLayout.WEST, resetButton, 6, SpringLayout.EAST, loadButton);
-		
-		// Text Input/Output
-		chatField = new JTextField("User Input", 50);
-		appLayout.putConstraint(SpringLayout.EAST, chatButton, 0, SpringLayout.EAST, chatField);
-		appLayout.putConstraint(SpringLayout.NORTH, resetButton, 56, SpringLayout.SOUTH, chatField);
-		appLayout.putConstraint(SpringLayout.NORTH, loadButton, 56, SpringLayout.SOUTH, chatField);
-		appLayout.putConstraint(SpringLayout.NORTH, checkerButton, 56, SpringLayout.SOUTH, chatField);
-		
-		chatArea = new JTextArea("Bot Output", 20, 50);
-		
-		chatPane = new JScrollPane();
+		checkerButton = new JButton("Check Text", checkerIcon);
+		tweetButton = new JButton("Send tweet", tweetIcon);
+		searchTwitterButton = new JButton("Search Twitter", searchIcon);
 		
 		buttonPanel = new JPanel(new GridLayout(1,0));
 		
-		setupButtons();
-		setupPanel();
+		chatField = new JTextField("Talk to the bot here", 50);
+		chatArea = new JTextArea("Chat Area", 20, 50);
+//		
+		chatPane = new JScrollPane();
 		setupLayout();
-		setupListeners();
 		setupScrollPane();
+		setupPanel();
+		setupListeners();
+		setupButtons();
 	}
 	
 	private void setupButtons()
 	{
-		buttonPanel.add(saveButton);
-		buttonPanel.add(loadButton);
+		buttonPanel.add(savingButton);
+		buttonPanel.add(loadingButton);
 		buttonPanel.add(chatButton);
 		buttonPanel.add(checkerButton);
 		buttonPanel.add(tweetButton);
-		buttonPanel.add(searchButton);
+		buttonPanel.add(searchTwitterButton);
 	}
-	
 	
 	private void setupPanel()
 	{
-		this.setLayout(appLayout);
+		this.setLayout(appLayout_1);
 		this.setPreferredSize(new Dimension(1024, 768));
-		this.setBackground(Color.MAGENTA);
-		this.add(chatButton);
-		this.add(checkerButton);
-		this.add(loadButton);
-		this.add(saveButton);
-		this.add(resetButton);
-		this.add(chatField);
-		this.add(chatPane);
 		buttonPanel.setPreferredSize(new Dimension(900, 150));
-		buttonPanel.setBackground(Color.CYAN);
+		buttonPanel.setBackground(Color.WHITE);
+		this.setBackground(Color.CYAN);
+		this.add(chatPane);
+		this.add(chatField);
+		this.add(buttonPanel);
+	}
+	
+	
+	
+	private void setupScrollPane()
+	{
+		chatArea.setEditable(false);
+		chatArea.setLineWrap(true);
+		chatArea.setWrapStyleWord(true);
+		
+		chatPane.setViewportView(chatArea);
+		chatPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		chatPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+	}
+	
+	private void setupListeners()
+	{
+		chatButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String userText = chatField.getText();
+				String response = "";
+				response += appController.interactWithChatbot(userText);
+				chatArea.append(response);
+				chatArea.setCaretPosition(chatArea.getDocument().getLength());
+				chatField.setText("");
+			}
+		});
+		
+		savingButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent click)
+					{
+						String chatText = chatArea.getText();
+						String path = getPath("save");
+						IOController.saveText(appController, path, chatText);
+						chatArea.setText("Chat saved!");
+					}
+						
+				});
+		
+		loadingButton.addActionListener(new ActionListener() 
+				{
+					public void actionPerformed(ActionEvent click)
+					{
+						
+					}
+				});
+		
+		checkerButton.addActionListener(new ActionListener()  
+				{
+					public void actionPerformed(ActionEvent click)
+					{
+						
+					}
+				
+				});
+		
+		tweetButton.addActionListener(new ActionListener()  
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String textToTweet = chatField.getText().trim();
+				appController.tweet(textToTweet);
+				
+			}
+		
+		});
+
+		searchTwitterButton.addActionListener(new ActionListener()  
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String username = chatField.getText().trim();
+				String display = appController.findWords(username);
+				chatArea.append("\n\n" + display);
+				
+			}
+		
+		});
 	}
 	
 	private String getPath(String choice)
@@ -146,115 +189,43 @@ public class ChatPanel extends JPanel
 		}
 		else
 		{
-			// the 'this' parameter tells the fileChooser window to pop in the ChatPanel
 			result = fileChooser.showOpenDialog(this);
 			if(result == JFileChooser.APPROVE_OPTION)
 			{
-				// Absolute path is the exact address
 				path = fileChooser.getSelectedFile().getAbsolutePath();
 			}
 		}
-		
 		return path;
 	}
 	
 	private void setupLayout()
 	{
-		appLayout.putConstraint(SpringLayout.NORTH, saveButton, 56, SpringLayout.SOUTH, chatField);
-		appLayout.putConstraint(SpringLayout.WEST, saveButton, 0, SpringLayout.WEST, chatField);
-		// chatField
-		appLayout.putConstraint(SpringLayout.NORTH, chatField, 30, SpringLayout.SOUTH, chatPane);
-		appLayout.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatPane);
-		appLayout.putConstraint(SpringLayout.EAST, chatField, 0, SpringLayout.EAST, chatPane);
-		// chatPane
-		appLayout.putConstraint(SpringLayout.NORTH, chatPane, 50, SpringLayout.NORTH, this);
-		appLayout.putConstraint(SpringLayout.WEST, chatPane, 50, SpringLayout.WEST, this);
-		appLayout.putConstraint(SpringLayout.EAST, chatPane, -50, SpringLayout.EAST, this);
+		savingButton = new JButton("Save");
+		
+		
+		loadingButton = new JButton("Load");
+		
+		
+		chatButton = new JButton("Chat");
+		
+		
+		checkerButton = new JButton("Check Text");
+		
+		
+		chatField = new JTextField("Talk to the bot here", 50);
+		appLayout_1.putConstraint(SpringLayout.NORTH, buttonPanel, 60, SpringLayout.SOUTH, chatField);
+		
+		chatArea = new JTextArea("Chat Area", 20, 50);
+		
+		chatPane = new JScrollPane();
+		appLayout_1.putConstraint(SpringLayout.WEST, buttonPanel, 0, SpringLayout.WEST, chatPane);
+		appLayout_1.putConstraint(SpringLayout.EAST, buttonPanel, 0, SpringLayout.EAST, chatPane);
+		appLayout_1.putConstraint(SpringLayout.NORTH, chatField, 30, SpringLayout.SOUTH, chatPane);
+		appLayout_1.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatPane);
+		appLayout_1.putConstraint(SpringLayout.EAST, chatField, 0, SpringLayout.EAST, chatPane);
+		appLayout_1.putConstraint(SpringLayout.NORTH, chatPane, 50, SpringLayout.NORTH, this);
+		appLayout_1.putConstraint(SpringLayout.WEST, chatPane, 50, SpringLayout.WEST, this);
+		appLayout_1.putConstraint(SpringLayout.EAST, chatPane, -50, SpringLayout.EAST, this);
 	}
 	
-	private void setupListeners()
-	{
-		chatButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				chatArea.setText("");
-				String userText = chatField.getText();
-				String response = "";
-				response = appController.interactWithChatbot(userText);
-				chatArea.append(response);
-				chatArea.setCaretPosition(chatArea.getDocument().getLength());
-				chatField.setText("");
-			}
-		});
-		
-		checkerButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				
-			}
-		});
-		
-		loadButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				String path = getPath("load");
-				String chatText = IOController.loadFile(appController, path);
-				chatArea.setText("Chat loaded! \n" + chatText);
-			}
-		});
-		
-		saveButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				String chatText = chatArea.getText();
-				String path = "./Chats";
-				IOController.saveText(appController, path, chatText);
-				chatArea.setText("Chat saved!");
-			}
-		});
-		
-		resetButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent click)
-			{
-				chatArea.setText("");
-			}
-		});
-		
-		tweetButton.addActionListener(new ActionListener()
-				{
-			public void actionPerformed(ActionEvent tweetClick)
-			{
-				String textToTweet = chatField.getText().trim();
-				appController.tweet(textToTweet);
-			}
-			});
-		
-		searchTwitterButton.addActionlistener(new ActionListener()
-				{
-			public void actionPerformed(ActionEvent searchClick)
-			{
-				String username = chatField.getText().trim();
-				String display = appController.findWords(username);
-				chatArea.append("\n\n" + display);
-			}
-				});
-	}
-	
-	private void setupScrollPane()
-	{
-		// Installs the text area
-		chatArea.setEditable(false); // Disallows user to edit bot output text
-		chatArea.setLineWrap(true); // Allows for a new line to start once the end of chatArea has been reached
-		chatArea.setWrapStyleWord(true); // Only allows for wrapping of words
-		
-		// Clarifies the policies for scroll bars in the bot output field
-		chatPane.setViewportView(chatArea); // Puts chatArea in chatPane
-		chatPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // No horizontal scroll bar - we have wrapping
-		chatPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-	}
 }
