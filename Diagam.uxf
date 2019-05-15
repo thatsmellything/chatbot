@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>350</y>
+      <w>300</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FinalFileController&gt;&gt;
+Package::controller
+--
++ loadFile(FinalController, String) : String
++ saveText(FinalController, String) : void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>110</y>
+      <w>300</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FinalController&gt;&gt;
+Package::controller
+--
++ FinalController()
++ findWords(String) : String
++ getAppFrame() : FinalFrame
++ handleErrors(Exception) : void
++ start() : void
++ tweet(String) : void
+--
+appFrame
+myTwitter
+--
+close() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>110</y>
+      <w>290</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FinalTwitter&gt;&gt;
+Package::model
+--
+app : FinalController
+FinalTwitter : Twitter
+searchedTweets : List&lt;Status&gt;
+totalWordCount : long
+tweetedWords : List&lt;String&gt;
+wordsAndCount : HashMap&lt;String, Integer&gt;
+--
++ collectTweets(String)
++ createIgnoredWordArray()
++ generateWordCount()
++ removeBlanks()
++ removePunctuation(String)
++ returnPolWords(String[])
++ searchForPolWords()
++ sortedWords()
++ sortHashMap()
++ trimTheBoringWords(String[])
++ turnStatusesToWords()
+--
+FinalTwitter(FinalController)
+getMostCommonPoliticalWord(String)
+getMostCommonWord(String)
+sendTweet(String)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>590</y>
+      <w>300</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FinalRunner&gt;&gt;
+Package::controller
+--
+main(String[]) : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>110</y>
+      <w>310</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FinalFrame&gt;&gt;
+Package::view
+--
+appController
+appPanel
+--
++ FinalFrame(FinalController)
+--
++ setupFrame() : void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>350</y>
+      <w>310</w>
+      <h>450</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;FinalPanel&gt;&gt;
+Package::view
+--
+appController : FinalController
+appLayout : SpringLayout
+appLayout_1 : SpringLayout
+buttonPanel : JPanel
+checkerButton : JButton
+checkerIcon : ImageIcon
+loadIcon : ImageIcon
+loadingButton : JButton
+resetButton : JButton
+saveIcon : ImageIcon
+savingButton : JButton
+searchIcon : ImageIcon
+searchTwitterButton : JButton
+textArea : JTextArea
+textField : JTextField
+textPane : JScrollPane
+tweetButton : JButton
+tweetIcon : ImageIcon
+FinalPanel(FinalController)
+getPath(String)
+setupButtons()
+setupLayout()
+setupListeners()
+setupPanel()
+setupScrollPane()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
