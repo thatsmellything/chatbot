@@ -223,8 +223,8 @@ public class ChatTwitter
 		
 		maxWord = sorted.get(0).getValue();
 
-		mostCommon = "The most common word in " + username + "'s "+ searchedTweets.size() + " tweets is " +
-					mostCommonWord + ", and it was used " + maxWord + " times.\nThis is " + 
+		mostCommon = "The most common word in " + username + "'s "+ searchedTweets.size() + " tweets is '" +
+					mostCommonWord + "', and it was used " + maxWord + " times.\nThis is " + 
 					(DecimalFormat.getPercentInstance().format(((double) maxWord) / totalWordCount)) + 
 					" of total words: " + totalWordCount + " and is " + 
 					(DecimalFormat.getPercentInstance().format(((double) maxWord) / wordsAndCount.size())) +
