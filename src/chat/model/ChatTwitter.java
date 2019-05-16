@@ -23,6 +23,18 @@ import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.ResponseList;
 import twitter4j.Status;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import twitter4j.DirectMessage;
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.StatusDeletionNotice;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 import chat.controller.IOController;
 
@@ -46,7 +58,10 @@ public class ChatTwitter
 		this.tweetedWords = new ArrayList<String>();
 		this.wordsAndCount = new HashMap<String, Integer>();
 		this.totalWordCount = 0;
+		
+		
 	}
+	
 	
 
 
