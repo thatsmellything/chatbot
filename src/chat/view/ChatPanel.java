@@ -257,5 +257,4 @@ public class ChatPanel extends JPanel
 		appLayout_1.putConstraint(SpringLayout.WEST, chatPane_1, 50, SpringLayout.WEST, this);
 		appLayout_1.putConstraint(SpringLayout.EAST, chatPane_1, -50, SpringLayout.EAST, this);
 	}
-	
 }
