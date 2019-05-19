@@ -209,7 +209,7 @@ public class ChatPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				String username = chatField.getText().trim();
-				pastCommandsArea.append("\n" + username + "\n");
+				pastCommandsArea.append("\n" + "Searched " + username + "\n");
 				String display = appController.findWords(username);
 				chatArea.append("\n\n" + display);
 				
@@ -222,7 +222,7 @@ public class ChatPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				String username = chatField.getText().trim();
-				pastCommandsArea.append("\n" + username + "\n");
+				pastCommandsArea.append("\n" + "Found " + username + "'s followers" + "\n");
 				String display = appController.findWords(username);
 				chatArea.append("\n\n" + display);
 				
@@ -234,7 +234,7 @@ public class ChatPanel extends JPanel
 				public void actionPerformed(ActionEvent click)
 				{
 				String username = chatField.getText();
-				pastCommandsArea.append("\n" + username + "\n");
+				pastCommandsArea.append("\n" + "Got in depth info on " + username + "'s account"  + "\n");
 				ResponseList<Status> display = appController.findUserTL(username);
 				chatArea.append("\n\n" + display);
 				}
