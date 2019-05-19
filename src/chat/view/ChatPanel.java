@@ -27,6 +27,7 @@ public class ChatPanel extends JPanel
 	private ChatController appController;
 	private JTextArea chatArea;
 	private JScrollPane chatPane;
+	private JScrollPane chatPane_1;
 	private JButton resetButton;
 	private JPanel buttonPanelBottom;
 	private JPanel buttonPanelTop;
@@ -117,7 +118,7 @@ public class ChatPanel extends JPanel
 		buttonPanelBottom.setPreferredSize(new Dimension(900, 150));
 		buttonPanelBottom.setBackground(Color.GRAY);
 		this.setBackground(Color.GRAY);
-		this.add(chatPane);
+		this.add(chatPane_1);
 		this.add(following);
 		this.add(chatField);
 		this.add(buttonPanelTop);
@@ -128,23 +129,19 @@ public class ChatPanel extends JPanel
 	
 	private void setupScrollPane()
 	{
-		chatArea.setEditable(false);
-		chatArea.setLineWrap(true);
-		chatArea.setWrapStyleWord(true);
 		
-		chatPane.setViewportView(chatArea);
-		chatPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		chatPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
-		fArea.setEditable(false);
-		fArea.setLineWrap(false);
-		fArea.setWrapStyleWord(false);
+		chatPane_1.setViewportView(chatArea);
+		chatPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		fArea = new JTextArea("Your Followers", 10, 20);
+		chatPane_1.setRowHeaderView(fArea);
 		fArea.setBackground(Color.DARK_GRAY);
 		fArea.setForeground(Color.CYAN);
 		fArea.setEditable(false);
-		chatPane.setRowHeaderView(fArea);
+		
+		fArea.setEditable(false);
+		fArea.setLineWrap(false);
+		fArea.setWrapStyleWord(true);
 		following.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		following.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
@@ -292,21 +289,24 @@ public class ChatPanel extends JPanel
 		appLayout.putConstraint(SpringLayout.NORTH, buttonPanelBottom, 60, SpringLayout.SOUTH, chatField);
 		
 		chatArea = new JTextArea("Chat Area", 20, 30);
+		chatArea.setWrapStyleWord(true);
+		chatArea.setLineWrap(true);
+		chatArea.setToolTipText("This is where the majority of the text goes from using the program. Only important information will be displayed on the screen to the left. The rest of it will be here :)");
 		chatArea.setForeground(Color.GREEN);
 		chatArea.setBackground(Color.DARK_GRAY);
 		
 		following = new JScrollPane();
 		
-		chatPane = new JScrollPane();
-		appLayout.putConstraint(SpringLayout.WEST, buttonPanelTop, 0, SpringLayout.WEST, chatPane);
-		appLayout.putConstraint(SpringLayout.EAST, buttonPanelTop, 0, SpringLayout.EAST, chatPane);
-		appLayout.putConstraint(SpringLayout.WEST, buttonPanelBottom, 0, SpringLayout.WEST, chatPane);
-		appLayout.putConstraint(SpringLayout.EAST, buttonPanelBottom, 0, SpringLayout.EAST, chatPane);
-		appLayout.putConstraint(SpringLayout.NORTH, chatField, 30, SpringLayout.SOUTH, chatPane);
-		appLayout.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatPane);
-		appLayout.putConstraint(SpringLayout.EAST, chatField, 0, SpringLayout.EAST, chatPane);
-		appLayout.putConstraint(SpringLayout.NORTH, chatPane, 50, SpringLayout.NORTH, this);
-		appLayout.putConstraint(SpringLayout.WEST, chatPane, 50, SpringLayout.WEST, this);
-		appLayout.putConstraint(SpringLayout.EAST, chatPane, -50, SpringLayout.EAST, this);
+		chatPane_1 = new JScrollPane();
+		appLayout.putConstraint(SpringLayout.WEST, buttonPanelTop, 0, SpringLayout.WEST, chatPane_1);
+		appLayout.putConstraint(SpringLayout.EAST, buttonPanelTop, 0, SpringLayout.EAST, chatPane_1);
+		appLayout.putConstraint(SpringLayout.WEST, buttonPanelBottom, 0, SpringLayout.WEST, chatPane_1);
+		appLayout.putConstraint(SpringLayout.EAST, buttonPanelBottom, 0, SpringLayout.EAST, chatPane_1);
+		appLayout.putConstraint(SpringLayout.NORTH, chatField, 30, SpringLayout.SOUTH, chatPane_1);
+		appLayout.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatPane_1);
+		appLayout.putConstraint(SpringLayout.EAST, chatField, 0, SpringLayout.EAST, chatPane_1);
+		appLayout.putConstraint(SpringLayout.NORTH, chatPane_1, 50, SpringLayout.NORTH, this);
+		appLayout.putConstraint(SpringLayout.WEST, chatPane_1, 50, SpringLayout.WEST, this);
+		appLayout.putConstraint(SpringLayout.EAST, chatPane_1, -50, SpringLayout.EAST, this);
 	}
 }
