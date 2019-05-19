@@ -131,9 +131,8 @@ public class ChatPanel extends JPanel
 	{
 		
 		chatPane_1.setViewportView(chatArea);
-		chatPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		pastCommandsArea = new JTextArea("Past Searches/Entries" + "\n\n\n" + "Find Followers: Finds the followers of the user searched" + "\n\n" + "Find Tweet: Will try to find a specific tweet" + "\n\n" + "InDepth Info: Finds all of the details to the users tweets and displays them" + "\n\n" + "Save: Saves the chat on the right" + "\n\n" + "Load: Loads a past save file" + "\n\n" + "Chat: Chats with the chatbot" + "\n\n" + "Check Text: Checks if the text supplied is valid" + "\n\n" + "Send Tweet: Posts a tweet on my account" + "\n\n" + "Search Twitter: Searches for the username supplied and reports back number of posts, most common word, and common words" + "\n\n" , 10, 20);
+		pastCommandsArea = new JTextArea("Past Searches/Entries" + "\n\n" + "Find Followers: Finds the followers of the user searched" + "\n" + "Find Tweet: Will try to find a specific tweet" + "\n" + "InDepth Info: Finds all of the details to the users tweets and displays them" + "\n" + "Save: Saves the chat on the right" + "\n" + "Load: Loads a past save file" + "\n" + "Chat: Chats with the chatbot" + "\n" + "Check Text: Checks if the text supplied is valid" + "\n" + "Send Tweet: Posts a tweet on my account" + "\n" + "Search Twitter: Searches for the username supplied and reports back number of posts, most common word, and common words" + "\n\n" , 10, 20);
 		pastCommandsArea.setToolTipText("Past Searches/Entries\nFind Followers: Finds the followers of the user searched\nFind Tweet: Will try to find a specific tweet\nInDepth Info: Finds all of the details to the users tweets and displays them\nSave: Saves the chat on the right\nLoad: Loads a past save file\nChat: Chats with the chatbot\nCheck Text: Checks if the text supplied is valid\nSend Tweet: Posts a tweet on my account\nSearch Twitter: Searches for the username supplied and reports back number of posts, most common word, and common words\n");
 		chatPane_1.setRowHeaderView(pastCommandsArea);
 		pastCommandsArea.setBackground(Color.DARK_GRAY);
