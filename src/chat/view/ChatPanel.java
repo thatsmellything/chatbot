@@ -3,6 +3,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import javax.swing.*;
+import javax.swing.text.*;
+import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
+import javax.swing.event.*;
+import javax.swing.GroupLayout.*;
+
 import javax.swing.*;
 import chat.controller.ChatController;
 import chat.controller.IOController;
@@ -15,6 +26,9 @@ import javax.swing.border.MatteBorder;
 public class ChatPanel extends JPanel
 {
 	private JTextField chatField;
+	private JTextField searchField;
+	private JButton searchButton;
+	private JTextField searchField_1;
 	private JButton chatButton;
 	private JButton checkerButton;
 	private JButton loadingButton;
@@ -43,6 +57,13 @@ public class ChatPanel extends JPanel
 	private JTextArea pastCommandsArea;
 	private JButton findFollowersButton;
 	
+	
+	final static Color  HILIT_COLOR = Color.LIGHT_GRAY;
+    final static Color  ERROR_COLOR = Color.PINK;
+    final static String CANCEL_ACTION = "cancel-search";
+  
+  
+	
 	public ChatPanel(ChatController appController)
 	{
 		super();
@@ -69,8 +90,9 @@ public class ChatPanel extends JPanel
 		searchTwitterButton = new JButton("Search Twitter", searchIcon);
 		findTweetButton = new JButton("Find a Tweet");
 		getTLButton = new JButton("InDepth Info >:)");
-		getTLButton.setToolTipText("Finds super in depth info on the target. Deconstructs each tweet to the bare minimum of what they have to offer and displays it all to the user.");
+		getTLButton.setToolTipText("Finds super in depth info on the target. \nDeconstructs each tweet to the bare \nminimum of what they have to offer and \ndisplays it all to the user. Best to use\nwith combination of a text editor\nto find key values.");
 		findFollowersButton = new JButton("Find Followers");
+		searchButton = new JButton("Search");
 		
 		buttonPanelTop = new JPanel(new GridLayout(1,0));
 		buttonPanelTop.setBorder(null);
@@ -78,6 +100,7 @@ public class ChatPanel extends JPanel
 		buttonPanelBottom.setBorder(null);
 		appLayout.putConstraint(SpringLayout.SOUTH, buttonPanelTop, -6, SpringLayout.NORTH, buttonPanelBottom);
 		
+		searchField = new JTextField("Search for keywords here");
 		chatField = new JTextField("Talk to the bot here", 50);
 		chatArea = new JTextArea("Chat Area", 20, 50);
 //		
@@ -119,13 +142,49 @@ public class ChatPanel extends JPanel
 		buttonPanelBottom.setPreferredSize(new Dimension(900, 150));
 		buttonPanelBottom.setBackground(Color.GRAY);
 		this.setBackground(Color.GRAY);
+		this.add(searchButton);
+		this.add(searchField_1);
 		this.add(chatPane_1);
 		this.add(chatField);
 		this.add(buttonPanelTop);
 		this.add(buttonPanelBottom);
 	}
 	
+	void message(String msg) {
+        chatArea.setText(msg);
+    }
 	
+	public void search(String s) {
+        DefaultHighlighter hilit = new DefaultHighlighter();
+        DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(HILIT_COLOR);
+		hilit.removeAllHighlights();
+		searchField.setHighlighter(hilit);
+		Color searchFieldBg = searchField.getBackground();
+        
+		
+        String searchWord = searchField.getText();
+        if (searchWord.length() <= 0) {
+            chatArea.setText("Nothing to search");
+            return;
+        }
+         
+        String content = chatArea.getText();
+        int index = content.indexOf(searchWord, 0);
+        if (index >= 0) {   // match found
+            try {
+                int end = index + searchWord.length();
+                hilit.addHighlight(index, end, painter);
+                chatArea.setCaretPosition(end);
+                searchField.setBackground(searchFieldBg);
+                message("'" + searchWord + "' found. Press ESC to end search");
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+        } else {
+            searchField.setBackground(ERROR_COLOR);
+            message("'" + searchWord + "' not found. Press ESC to start a new search");
+        }
+    }
 	
 	private void setupScrollPane()
 	{
@@ -182,6 +241,16 @@ public class ChatPanel extends JPanel
 						pastCommandsArea.append("\n" + "Loaded File" + "\n");
 					}
 				});
+		searchButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent click)
+					{
+						String s = searchField.getText();
+						search(s);
+					}
+			
+				}
+				);
 		
 		checkerButton.addActionListener(new ActionListener()  
 				{
@@ -286,6 +355,12 @@ public class ChatPanel extends JPanel
 		checkerButton = new JButton("Check Text");
 		checkerButton.setForeground(Color.ORANGE);
 		
+		searchField_1 = new JTextField("", 10);
+		appLayout.putConstraint(SpringLayout.WEST, searchField_1, 809, SpringLayout.WEST, this);
+		appLayout.putConstraint(SpringLayout.EAST, searchField_1, -50, SpringLayout.EAST, this);
+		searchField_1.setToolTipText("Search the chat text");
+		searchField_1.setForeground(Color.GREEN);
+		searchField_1.setBackground(Color.DARK_GRAY);
 		
 		chatField = new JTextField("", 50);
 		chatField.setToolTipText("Please enter the twitter account here or talk with chatbot");
@@ -302,6 +377,7 @@ public class ChatPanel extends JPanel
 		chatArea.setBackground(Color.DARK_GRAY);
 		
 		chatPane_1 = new JScrollPane();
+		appLayout.putConstraint(SpringLayout.SOUTH, searchField_1, -6, SpringLayout.NORTH, chatPane_1);
 		appLayout.putConstraint(SpringLayout.WEST, buttonPanelTop, 0, SpringLayout.WEST, chatPane_1);
 		appLayout.putConstraint(SpringLayout.EAST, buttonPanelTop, 0, SpringLayout.EAST, chatPane_1);
 		appLayout.putConstraint(SpringLayout.WEST, buttonPanelBottom, 0, SpringLayout.WEST, chatPane_1);
