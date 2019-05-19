@@ -6,6 +6,10 @@ import java.awt.*;
 import javax.swing.*;
 import chat.controller.ChatController;
 import chat.controller.IOController;
+import twitter4j.Paging;
+import twitter4j.ResponseList;
+import twitter4j.Status;
+
 import javax.swing.border.MatteBorder;
 
 public class ChatPanel extends JPanel
@@ -226,12 +230,14 @@ public class ChatPanel extends JPanel
 		});
 		
 		getTLButton.addActionListener(new ActionListener()
+		{
+				public void actionPerformed(ActionEvent click)
 				{
-			public void actionPerformed (ActionEvent click)
-			{
-				
-			}
-				});
+				String username = chatField.getText();
+				ResponseList<Status> display = appController.findUserTL(username);
+				chatArea.append("\n\n" + display);
+				}
+		});
 				
 		
 		

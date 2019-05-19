@@ -287,6 +287,42 @@ public class ChatTwitter
 return allWords;
 	}
 	
+	public ResponseList<Status> findUserTL(String user)
+	{
+		
+		
+		Paging statusPage = new Paging(1,100);
+		int page = 1;
+		long lastID = Long.MAX_VALUE;
 	
+		while(page <= 10)
+		{
+			statusPage.setPage(page);
+			try
+			{	
+			ResponseList<Status> listedTweets = chatTwitter.getUserTimeline(user, statusPage);
+			for(Status current : listedTweets)
+			{
+				if(current.getId() < lastID)
+				{
+					searchedTweets.add(current);
+					lastID = current.getId();
+				}
+				return listedTweets;
+			}
+		}
+		catch(TwitterException searchTweetError)
+			{
+			app.handleErrors(searchTweetError);
+			
+			}
+		page++;
+		}
+		return null;
+		
+		
+	}
+
+
 
 }

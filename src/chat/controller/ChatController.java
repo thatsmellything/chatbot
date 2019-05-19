@@ -2,6 +2,10 @@ package chat.controller;
 
 import chat.model.Chatbot;
 import chat.view.ChatFrame;
+import twitter4j.Paging;
+import twitter4j.ResponseList;
+import twitter4j.Status;
+
 import javax.swing.JOptionPane;
 import chat.model.ChatTwitter;
 
@@ -76,6 +80,12 @@ public class ChatController
 	public String findWords(String user)
 	{
 		String results = myTwitter.getMostCommonWord(user);
+		return results;
+	}
+	
+	public ResponseList<Status> findUserTL(String user)
+	{
+		ResponseList<Status> results = myTwitter.findUserTL(user);
 		return results;
 	}
 	
