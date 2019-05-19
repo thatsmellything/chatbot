@@ -68,7 +68,8 @@ public class ChatPanel extends JPanel
 		tweetButton = new JButton("Send tweet", tweetIcon);
 		searchTwitterButton = new JButton("Search Twitter", searchIcon);
 		findTweetButton = new JButton("Find a Tweet");
-		getTLButton = new JButton("Get Timeline");
+		getTLButton = new JButton("In Depth Info >:)");
+		getTLButton.setToolTipText("Finds super in depth info on the target. Deconstructs each tweet to the bare minimum of what they have to offer and displays it all to the user.");
 		findFollowersButton = new JButton("Find Followers");
 		
 		buttonPanelTop = new JPanel(new GridLayout(1,0));
@@ -283,7 +284,8 @@ public class ChatPanel extends JPanel
 		checkerButton.setForeground(Color.ORANGE);
 		
 		
-		chatField = new JTextField("Talk to the bot here this is more test", 50);
+		chatField = new JTextField("", 50);
+		chatField.setToolTipText("Please enter the twitter account here or talk with chatbot");
 		chatField.setForeground(Color.GREEN);
 		chatField.setBackground(Color.DARK_GRAY);
 		appLayout.putConstraint(SpringLayout.NORTH, buttonPanelBottom, 60, SpringLayout.SOUTH, chatField);
