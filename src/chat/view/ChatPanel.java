@@ -40,7 +40,7 @@ public class ChatPanel extends JPanel
 	
 	
 	private JScrollPane following;
-	private JTextArea fArea;
+	private JTextArea pastCommandsArea;
 	private JButton findFollowersButton;
 	
 	public ChatPanel(ChatController appController)
@@ -81,7 +81,7 @@ public class ChatPanel extends JPanel
 		chatField = new JTextField("Talk to the bot here", 50);
 		chatArea = new JTextArea("Chat Area", 20, 50);
 //		
-		fArea = new JTextArea("Followers area", 10, 10);
+		pastCommandsArea = new JTextArea("Followers area", 10, 10);
 		chatPane = new JScrollPane();
 		following = new JScrollPane();
 		setupLayout();
@@ -133,15 +133,15 @@ public class ChatPanel extends JPanel
 		chatPane_1.setViewportView(chatArea);
 		chatPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
-		fArea = new JTextArea("Your Followers", 10, 20);
-		chatPane_1.setRowHeaderView(fArea);
-		fArea.setBackground(Color.DARK_GRAY);
-		fArea.setForeground(Color.CYAN);
-		fArea.setEditable(false);
+		pastCommandsArea = new JTextArea("Past Searches/Entries", 10, 20);
+		chatPane_1.setRowHeaderView(pastCommandsArea);
+		pastCommandsArea.setBackground(Color.DARK_GRAY);
+		pastCommandsArea.setForeground(Color.CYAN);
+		pastCommandsArea.setEditable(false);
 		
-		fArea.setEditable(false);
-		fArea.setLineWrap(false);
-		fArea.setWrapStyleWord(true);
+		pastCommandsArea.setEditable(false);
+		pastCommandsArea.setLineWrap(false);
+		pastCommandsArea.setWrapStyleWord(true);
 		
 	}
 	
@@ -151,6 +151,7 @@ public class ChatPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
+				pastCommandsArea.append("\n" + "Chatted with Bot" + "\n");
 				String userText = chatField.getText();
 				String response = "";
 				response += appController.interactWithChatbot(userText);
@@ -169,6 +170,7 @@ public class ChatPanel extends JPanel
 						String path = getPath("save");
 						IOController.saveText(appController, path, chatText);
 						chatArea.setText("Chat saved!");
+						pastCommandsArea.append("\n" + "Saved Chat" + "\n");
 					}
 						
 				});
@@ -177,7 +179,7 @@ public class ChatPanel extends JPanel
 				{
 					public void actionPerformed(ActionEvent click)
 					{
-						
+						pastCommandsArea.append("\n" + "Loaded File" + "\n");
 					}
 				});
 		
@@ -185,7 +187,7 @@ public class ChatPanel extends JPanel
 				{
 					public void actionPerformed(ActionEvent click)
 					{
-						
+						pastCommandsArea.append("\n" + "Checked Text" + "\n");
 					}
 				
 				});
@@ -195,6 +197,7 @@ public class ChatPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				String textToTweet = chatField.getText().trim();
+				pastCommandsArea.append("\n" + "Posted tweet" + "\n");
 				appController.tweet(textToTweet);
 				
 			}
@@ -206,6 +209,7 @@ public class ChatPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				String username = chatField.getText().trim();
+				pastCommandsArea.append("\n" + username + "\n");
 				String display = appController.findWords(username);
 				chatArea.append("\n\n" + display);
 				
@@ -218,6 +222,7 @@ public class ChatPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				String username = chatField.getText().trim();
+				pastCommandsArea.append("\n" + username + "\n");
 				String display = appController.findWords(username);
 				chatArea.append("\n\n" + display);
 				
@@ -229,6 +234,7 @@ public class ChatPanel extends JPanel
 				public void actionPerformed(ActionEvent click)
 				{
 				String username = chatField.getText();
+				pastCommandsArea.append("\n" + username + "\n");
 				ResponseList<Status> display = appController.findUserTL(username);
 				chatArea.append("\n\n" + display);
 				}
