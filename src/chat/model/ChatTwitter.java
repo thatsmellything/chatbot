@@ -286,5 +286,7 @@ public class ChatTwitter
 		
 return allWords;
 	}
+	
+	
 
 }
