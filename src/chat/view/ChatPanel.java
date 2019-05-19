@@ -356,6 +356,9 @@ public class ChatPanel extends JPanel
 		checkerButton.setForeground(Color.ORANGE);
 		
 		searchField_1 = new JTextField("", 10);
+		appLayout.putConstraint(SpringLayout.NORTH, searchField_1, 21, SpringLayout.NORTH, this);
+		appLayout.putConstraint(SpringLayout.NORTH, searchButton, 0, SpringLayout.NORTH, searchField_1);
+		appLayout.putConstraint(SpringLayout.EAST, searchButton, -6, SpringLayout.WEST, searchField_1);
 		appLayout.putConstraint(SpringLayout.WEST, searchField_1, 809, SpringLayout.WEST, this);
 		appLayout.putConstraint(SpringLayout.EAST, searchField_1, -50, SpringLayout.EAST, this);
 		searchField_1.setToolTipText("Search the chat text");
@@ -377,7 +380,7 @@ public class ChatPanel extends JPanel
 		chatArea.setBackground(Color.DARK_GRAY);
 		
 		chatPane_1 = new JScrollPane();
-		appLayout.putConstraint(SpringLayout.SOUTH, searchField_1, -6, SpringLayout.NORTH, chatPane_1);
+		appLayout.putConstraint(SpringLayout.SOUTH, searchField_1, -3, SpringLayout.NORTH, chatPane_1);
 		appLayout.putConstraint(SpringLayout.WEST, buttonPanelTop, 0, SpringLayout.WEST, chatPane_1);
 		appLayout.putConstraint(SpringLayout.EAST, buttonPanelTop, 0, SpringLayout.EAST, chatPane_1);
 		appLayout.putConstraint(SpringLayout.WEST, buttonPanelBottom, 0, SpringLayout.WEST, chatPane_1);
