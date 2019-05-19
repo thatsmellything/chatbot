@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 import chat.controller.ChatController;
 import chat.controller.IOController;
+import javax.swing.border.MatteBorder;
 
 public class ChatPanel extends JPanel
 {
@@ -16,14 +17,15 @@ public class ChatPanel extends JPanel
 	private JButton savingButton;
 	private JButton tweetButton;
 	private JButton searchTwitterButton;
+	private JButton findTweetButton;
+	private JButton getTLButton;
 	private SpringLayout appLayout;
-	private SpringLayout appLayout_1;
 	private ChatController appController;
 	private JTextArea chatArea;
 	private JScrollPane chatPane;
-	private JScrollPane chatPane_1;
 	private JButton resetButton;
-	private JPanel buttonPanel;
+	private JPanel buttonPanelBottom;
+	private JPanel buttonPanelTop;
 	private ImageIcon saveIcon;
 	private ImageIcon loadIcon;
 	private ImageIcon chatIcon;
@@ -31,8 +33,10 @@ public class ChatPanel extends JPanel
 	private ImageIcon checkerIcon;
 	private ImageIcon searchIcon;
 	
+	
 	private JScrollPane following;
 	private JTextArea fArea;
+	private JButton findFollowersButton;
 	
 	public ChatPanel(ChatController appController)
 	{
@@ -50,8 +54,7 @@ public class ChatPanel extends JPanel
 
 		
 		
-		this.appController = appController;
-		appLayout_1 = new SpringLayout();
+		
 //		
 		savingButton = new JButton("Save", saveIcon);
 		loadingButton = new JButton("Load", loadIcon);
@@ -59,8 +62,15 @@ public class ChatPanel extends JPanel
 		checkerButton = new JButton("Check Text", checkerIcon);
 		tweetButton = new JButton("Send tweet", tweetIcon);
 		searchTwitterButton = new JButton("Search Twitter", searchIcon);
+		findTweetButton = new JButton("Find a Tweet");
+		getTLButton = new JButton("Get Timeline");
+		findFollowersButton = new JButton("Find Followers");
 		
-		buttonPanel = new JPanel(new GridLayout(1,0));
+		buttonPanelTop = new JPanel(new GridLayout(1,0));
+		buttonPanelTop.setBorder(null);
+		buttonPanelBottom = new JPanel(new GridLayout(1,0));
+		buttonPanelBottom.setBorder(null);
+		appLayout.putConstraint(SpringLayout.SOUTH, buttonPanelTop, -6, SpringLayout.NORTH, buttonPanelBottom);
 		
 		chatField = new JTextField("Talk to the bot here", 50);
 		chatArea = new JTextArea("Chat Area", 20, 50);
@@ -72,30 +82,42 @@ public class ChatPanel extends JPanel
 		setupScrollPane();
 		setupPanel();
 		setupListeners();
-		setupButtons();
+		setupButtonsBottom();
+		setupButtonsTop();
 	}
 	
-	private void setupButtons()
+	private void setupButtonsTop()
 	{
-		buttonPanel.add(savingButton);
-		buttonPanel.add(loadingButton);
-		buttonPanel.add(chatButton);
-		buttonPanel.add(checkerButton);
-		buttonPanel.add(tweetButton);
-		buttonPanel.add(searchTwitterButton);
+		buttonPanelTop.add(findFollowersButton);
+		buttonPanelTop.add(findTweetButton);
+		buttonPanelTop.add(getTLButton);
+	}
+	
+	private void setupButtonsBottom()
+	{
+		buttonPanelBottom.add(savingButton);
+		buttonPanelBottom.add(loadingButton);
+		buttonPanelBottom.add(chatButton);
+		buttonPanelBottom.add(checkerButton);
+		buttonPanelBottom.add(tweetButton);
+		buttonPanelBottom.add(searchTwitterButton);
+		
 	}
 	
 	private void setupPanel()
 	{
-		this.setLayout(appLayout_1);
+		this.setLayout(appLayout);
 		this.setPreferredSize(new Dimension(1024, 768));
-		buttonPanel.setPreferredSize(new Dimension(900, 150));
-		buttonPanel.setBackground(Color.WHITE);
+		buttonPanelTop.setPreferredSize(new Dimension(900, 50));
+		buttonPanelTop.setBackground(Color.GRAY);
+		buttonPanelBottom.setPreferredSize(new Dimension(900, 150));
+		buttonPanelBottom.setBackground(Color.GRAY);
 		this.setBackground(Color.GRAY);
-		this.add(chatPane_1);
+		this.add(chatPane);
 		this.add(following);
 		this.add(chatField);
-		this.add(buttonPanel);
+		this.add(buttonPanelTop);
+		this.add(buttonPanelBottom);
 	}
 	
 	
@@ -106,9 +128,9 @@ public class ChatPanel extends JPanel
 		chatArea.setLineWrap(true);
 		chatArea.setWrapStyleWord(true);
 		
-		chatPane_1.setViewportView(chatArea);
-		chatPane_1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		chatPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		chatPane.setViewportView(chatArea);
+		chatPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		chatPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		fArea.setEditable(false);
 		fArea.setLineWrap(false);
@@ -118,7 +140,7 @@ public class ChatPanel extends JPanel
 		fArea.setBackground(Color.DARK_GRAY);
 		fArea.setForeground(Color.CYAN);
 		fArea.setEditable(false);
-		chatPane_1.setRowHeaderView(fArea);
+		chatPane.setRowHeaderView(fArea);
 		following.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		following.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
@@ -191,6 +213,28 @@ public class ChatPanel extends JPanel
 			}
 		
 		});
+		
+		findFollowersButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String username = chatField.getText().trim();
+				String display = appController.findWords(username);
+				chatArea.append("\n\n" + display);
+				
+			}
+		});
+		
+		getTLButton.addActionListener(new ActionListener()
+				{
+			public void actionPerformed (ActionEvent click)
+			{
+				
+			}
+				});
+				
+		
+		
 	}
 	
 	private String getPath(String choice)
@@ -236,10 +280,10 @@ public class ChatPanel extends JPanel
 		checkerButton.setForeground(Color.ORANGE);
 		
 		
-		chatField = new JTextField("Talk to the bot here", 50);
+		chatField = new JTextField("Talk to the bot here this is more test", 50);
 		chatField.setForeground(Color.GREEN);
 		chatField.setBackground(Color.DARK_GRAY);
-		appLayout_1.putConstraint(SpringLayout.NORTH, buttonPanel, 60, SpringLayout.SOUTH, chatField);
+		appLayout.putConstraint(SpringLayout.NORTH, buttonPanelBottom, 60, SpringLayout.SOUTH, chatField);
 		
 		chatArea = new JTextArea("Chat Area", 20, 30);
 		chatArea.setForeground(Color.GREEN);
@@ -247,14 +291,16 @@ public class ChatPanel extends JPanel
 		
 		following = new JScrollPane();
 		
-		chatPane_1 = new JScrollPane();
-		appLayout_1.putConstraint(SpringLayout.WEST, buttonPanel, 0, SpringLayout.WEST, chatPane_1);
-		appLayout_1.putConstraint(SpringLayout.EAST, buttonPanel, 0, SpringLayout.EAST, chatPane_1);
-		appLayout_1.putConstraint(SpringLayout.NORTH, chatField, 30, SpringLayout.SOUTH, chatPane_1);
-		appLayout_1.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatPane_1);
-		appLayout_1.putConstraint(SpringLayout.EAST, chatField, 0, SpringLayout.EAST, chatPane_1);
-		appLayout_1.putConstraint(SpringLayout.NORTH, chatPane_1, 50, SpringLayout.NORTH, this);
-		appLayout_1.putConstraint(SpringLayout.WEST, chatPane_1, 50, SpringLayout.WEST, this);
-		appLayout_1.putConstraint(SpringLayout.EAST, chatPane_1, -50, SpringLayout.EAST, this);
+		chatPane = new JScrollPane();
+		appLayout.putConstraint(SpringLayout.WEST, buttonPanelTop, 0, SpringLayout.WEST, chatPane);
+		appLayout.putConstraint(SpringLayout.EAST, buttonPanelTop, 0, SpringLayout.EAST, chatPane);
+		appLayout.putConstraint(SpringLayout.WEST, buttonPanelBottom, 0, SpringLayout.WEST, chatPane);
+		appLayout.putConstraint(SpringLayout.EAST, buttonPanelBottom, 0, SpringLayout.EAST, chatPane);
+		appLayout.putConstraint(SpringLayout.NORTH, chatField, 30, SpringLayout.SOUTH, chatPane);
+		appLayout.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatPane);
+		appLayout.putConstraint(SpringLayout.EAST, chatField, 0, SpringLayout.EAST, chatPane);
+		appLayout.putConstraint(SpringLayout.NORTH, chatPane, 50, SpringLayout.NORTH, this);
+		appLayout.putConstraint(SpringLayout.WEST, chatPane, 50, SpringLayout.WEST, this);
+		appLayout.putConstraint(SpringLayout.EAST, chatPane, -50, SpringLayout.EAST, this);
 	}
 }
