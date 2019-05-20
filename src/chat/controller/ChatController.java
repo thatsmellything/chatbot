@@ -9,6 +9,11 @@ import twitter4j.Status;
 import javax.swing.JOptionPane;
 import chat.model.ChatTwitter;
 
+/**
+ * Final Controller
+ * @author jjud0535
+ * The controller for the whole project
+ */
 
 public class ChatController 
 {
@@ -16,6 +21,11 @@ public class ChatController
 	private ChatTwitter myTwitter;
 	private ChatFrame appFrame;
 
+	/**
+	 * This controller builds the appFrame and myTwitter for the twitter
+	 * functionality of the program
+	 */
+	
 	public ChatController() 
 	{
 		// Init the model before the view!
@@ -24,6 +34,11 @@ public class ChatController
 		myTwitter = new ChatTwitter(this);
 	}
 
+	/**
+	 * start the program, put in methods that you want it to
+	 * run right off the bat if you want
+	 */
+	
 	public void start() 
 	{
 		
@@ -52,15 +67,28 @@ public class ChatController
 		return content;
 	}
 	
+	/**
+	 * When the user wants the program to close it closes
+	 */
+	
 	private void close()
 	{
 		System.exit(0);
 	}
 	
+	/**
+	 * Catches errors and then displays them in the console
+	 */
+	
 	public void handleErrors(Exception error)
 	{
 		JOptionPane.showMessageDialog(appFrame, error.getMessage());
 	}
+	
+	/**
+	 * gets the appFrame
+	 * @return
+	 */
 	
 	public ChatFrame getAppFrame()
 	{
@@ -72,10 +100,21 @@ public class ChatController
 		return simpleBot;
 	}
 	
+	/**
+	 * Allows the sending of a tweet
+	 * @param text
+	 */
+	
 	public void tweet(String text)
 	{
 		myTwitter.sendTweet(text);
 	}
+	
+	/**
+	 * puts in the username to find most common words
+	 * @param user
+	 * @return
+	 */
 	
 	public String findWords(String user)
 	{

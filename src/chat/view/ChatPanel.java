@@ -17,9 +17,12 @@ import javax.swing.GroupLayout.*;
 import javax.swing.*;
 import chat.controller.ChatController;
 import chat.controller.IOController;
+import chat.model.ChatTwitter;
+import twitter4j.IDs;
 import twitter4j.Paging;
 import twitter4j.ResponseList;
 import twitter4j.Status;
+import twitter4j.Twitter;
 
 import javax.swing.border.MatteBorder;
 
@@ -154,36 +157,23 @@ public class ChatPanel extends JPanel
         chatArea.setText(msg);
     }
 	
-	public void search(String s) {
-        DefaultHighlighter hilit = new DefaultHighlighter();
-        DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(HILIT_COLOR);
-		hilit.removeAllHighlights();
-		searchField.setHighlighter(hilit);
-		Color searchFieldBg = searchField.getBackground();
-        
+	public void search() 
+	{
 		
-        String searchWord = searchField.getText();
-        if (searchWord.length() <= 0) {
-            chatArea.setText("Nothing to search");
-            return;
-        }
-         
-        String content = chatArea.getText();
-        int index = content.indexOf(searchWord, 0);
-        if (index >= 0) {   // match found
-            try {
-                int end = index + searchWord.length();
-                hilit.addHighlight(index, end, painter);
-                chatArea.setCaretPosition(end);
-                searchField.setBackground(searchFieldBg);
-                message("'" + searchWord + "' found. Press ESC to end search");
-            } catch (BadLocationException e) {
-                e.printStackTrace();
-            }
-        } else {
-            searchField.setBackground(ERROR_COLOR);
-            message("'" + searchWord + "' not found. Press ESC to start a new search");
-        }
+		String searchText = searchField.getText();
+		String chatText = chatField.getText();
+		Highlighter h = chatArea.getHighlighter();
+		h.removeAllHighlights();
+		int pos = chatText.indexOf(searchText, 0);
+		try
+		{
+			h.addHighlight(pos, pos + searchText.length(), DefaultHighlighter.DefaultPainter);
+		}
+		catch (BadLocationException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 	
 	private void setupScrollPane()
@@ -245,8 +235,21 @@ public class ChatPanel extends JPanel
 				{
 					public void actionPerformed(ActionEvent click)
 					{
-						String s = searchField.getText();
-						search(s);
+						String searchText = searchField.getText();
+						String chatText = chatField.getText();
+						Highlighter h = chatArea.getHighlighter();
+						
+						
+						int i = searchField.getText().length();
+						
+						int start = chatText.indexOf(searchText, 0);
+						int end = start + i;
+						chatField.setSelectionStart(start);
+						chatField.setSelectionEnd(end);
+						
+						
+						
+						search();
 					}
 			
 				}
@@ -290,10 +293,6 @@ public class ChatPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				String username = chatField.getText().trim();
-				pastCommandsArea.append("\n" + "Found " + username + "'s followers" + "\n");
-				String display = appController.findWords(username);
-				chatArea.append("\n\n" + display);
 				
 			}
 		});
