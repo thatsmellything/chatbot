@@ -43,6 +43,13 @@ public class ChatController
 	{
 		
 	}
+	
+	/**
+	 * Method to interact with the bot
+	 * @param text
+	 * @return
+	 */
+	
 
 	public String interactWithChatbot(String text) 
 	{
@@ -50,6 +57,12 @@ public class ChatController
 		output += simpleBot.processText(text);
 		return output;
 	}
+	
+	/**
+	 * checks the text for keywords
+	 * @param text
+	 * @return
+	 */
 
 	public String useChatbotCheckers(String text) 
 	{
@@ -95,6 +108,11 @@ public class ChatController
 		return appFrame;
 	}
 	
+	/**
+	 * returns the simple bot
+	 * @return
+	 */
+	
 	public Chatbot getChatbot() 
 	{
 		return simpleBot;
@@ -121,6 +139,12 @@ public class ChatController
 		String results = myTwitter.getMostCommonWord(user);
 		return results;
 	}
+	
+	/**
+	 * returns the Twitter user statuses to show all the sneaky stuff
+	 * @param user
+	 * @return
+	 */
 	
 	public ResponseList<Status> findUserTL(String user)
 	{

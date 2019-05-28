@@ -6,8 +6,22 @@ import java.io.IOException;
 import java.io.File;
 import java.io.PrintWriter;
 
+/**
+ * This class is to handle all the file jazz for saving and loading
+ * @author jjud0535
+ *
+ */
+
 public class IOController 
 {
+	
+	/**
+	 * save the text that is in the chat field to a binary file output
+	 * @param appController
+	 * @param path
+	 * @param textToSave
+	 */
+	
 	public static void saveText(ChatController appController, String path, String textToSave)
 	{
 		try
@@ -42,6 +56,13 @@ public class IOController
 			appController.handleErrors(genericError);
 		}
 	}
+	
+	/**
+	 * load a past saved file from your system
+	 * @param appController
+	 * @param path
+	 * @return
+	 */
 	
 	public static String loadFile(ChatController appController, String path)
 	{

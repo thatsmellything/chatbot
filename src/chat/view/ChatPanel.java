@@ -26,6 +26,12 @@ import twitter4j.Twitter;
 
 import javax.swing.border.MatteBorder;
 
+/**
+ * Chat Panel to run all of the actual functions of the GUI
+ * @author jjud0535
+ *
+ */
+
 public class ChatPanel extends JPanel
 {
 	private JTextField chatField;
@@ -66,7 +72,10 @@ public class ChatPanel extends JPanel
     final static String CANCEL_ACTION = "cancel-search";
   
   
-	
+	/**
+	 * Creates all the icons and buttons and objects
+	 * @param appController
+	 */
 	public ChatPanel(ChatController appController)
 	{
 		super();
@@ -118,12 +127,20 @@ public class ChatPanel extends JPanel
 		setupButtonsTop();
 	}
 	
+	/**
+	 * Just sets up the button panel on top
+	 */
+	
 	private void setupButtonsTop()
 	{
 		buttonPanelTop.add(findFollowersButton);
 		buttonPanelTop.add(findTweetButton);
 		buttonPanelTop.add(getTLButton);
 	}
+	
+	/**
+	 * sets up the button panel on bottom
+	 */
 	
 	private void setupButtonsBottom()
 	{
@@ -135,6 +152,10 @@ public class ChatPanel extends JPanel
 		buttonPanelBottom.add(searchTwitterButton);
 		
 	}
+	
+	/**
+	 * Sets up the panel aka the whole thing
+	 */
 	
 	private void setupPanel()
 	{
@@ -153,28 +174,34 @@ public class ChatPanel extends JPanel
 		this.add(buttonPanelBottom);
 	}
 	
+	/**
+	 * sets up message box
+	 * @param msg
+	 */
+	
 	void message(String msg) {
         chatArea.setText(msg);
     }
 	
+	/**
+	 * sets up the search field
+	 */
+	
 	public void search() 
 	{
 		
-		String searchText = searchField.getText();
+String searchText = searchField.getText();
 		String chatText = chatField.getText();
 		Highlighter h = chatArea.getHighlighter();
 		h.removeAllHighlights();
-		int pos = chatText.indexOf(searchText, 0);
-		try
-		{
-			h.addHighlight(pos, pos + searchText.length(), DefaultHighlighter.DefaultPainter);
-		}
-		catch (BadLocationException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+
+		String other = chatText.substring(1, 2);
     }
+	
+	/**
+	 * sets up the scroll pane
+	 */
 	
 	private void setupScrollPane()
 	{
@@ -193,6 +220,10 @@ public class ChatPanel extends JPanel
 		pastCommandsArea.setWrapStyleWord(true);
 		
 	}
+	
+	/**
+	 * creates all of the listeners for the program
+	 */
 	
 	private void setupListeners()
 	{
@@ -312,6 +343,12 @@ public class ChatPanel extends JPanel
 		
 	}
 	
+	/**
+	 * sets up the file IO
+	 * @param choice
+	 * @return
+	 */
+	
 	private String getPath(String choice)
 	{
 		String path = ".";
@@ -336,6 +373,10 @@ public class ChatPanel extends JPanel
 		}
 		return path;
 	}
+	
+	/**
+	 * sets up the layout for the app GUI
+	 */
 	
 	private void setupLayout()
 	{
