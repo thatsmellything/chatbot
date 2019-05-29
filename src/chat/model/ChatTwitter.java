@@ -38,6 +38,12 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import chat.controller.IOController;
 
+/**
+ * Creates the java ChatTwtitter class, does all the twitter functions
+ * @author jjud0535
+ *
+ */
+
 public class ChatTwitter
 {
 
@@ -48,6 +54,11 @@ public class ChatTwitter
 	private List<String> tweetedWords;
 	private long totalWordCount;
 	private HashMap<String, Integer> wordsAndCount;
+	
+	/**
+	 * Just generally sets up the app
+	 * @param app
+	 */
 	
 	public ChatTwitter(ChatController app)
 	{
@@ -64,6 +75,10 @@ public class ChatTwitter
 	
 	
 
+	/**
+	 * Sends a tweet to twitter via whats in the text field
+	 * @param textToTweet
+	 */
 
 	public void sendTweet(String textToTweet)
 	{
@@ -81,6 +96,11 @@ public class ChatTwitter
 	}
 	}
 
+	
+	/**
+	 * collects tweets from a certain person
+	 * @param username
+	 */
 
 	private void collectTweets(String username)
 	{	
@@ -111,6 +131,10 @@ public class ChatTwitter
 		}
 	}
 	
+	/**
+	 * changes the statuses to actual words
+	 */
+	
 	private void turnStatusesToWords()
 	{
 		for(Status currentStatus : searchedTweets)
@@ -124,6 +148,12 @@ public class ChatTwitter
 			}
 		}
 	}
+	
+	/**
+	 * removes punctuation from words
+	 * @param currentString
+	 * @return
+	 */
 	
 	private String removePunctuation(String currentString)
 	{
@@ -140,6 +170,10 @@ public class ChatTwitter
 		return scrubbedString;
 	}
 	
+	/**
+	 * removes spaces
+	 */
+	
 	private void removeBlanks()
 	{
 		for (int index = tweetedWords.size() - 1; index >= 0; index--)
@@ -150,6 +184,11 @@ public class ChatTwitter
 			}
 		}
 	}
+	
+	/**
+	 * creates the ignored words array full of boring stuff
+	 * @return
+	 */
 	
 	private String [] createIgnoredWordArray()
 	{
@@ -182,6 +221,11 @@ public class ChatTwitter
 		return boringWords;
 	}
 	
+	/**
+	 * trims the boring words from the tweets
+	 * @param boringWords
+	 */
+	
 	private void trimTheBoringWords(String [] boringWords)
 	{
 		for (int index = tweetedWords.size() - 1; index >= 0; index--)
@@ -196,6 +240,10 @@ public class ChatTwitter
 			}
 		}
 	}
+	
+	/**
+	 * makes a word count of user
+	 */
 	
 	private void generateWordCount()
 	{
@@ -212,6 +260,11 @@ public class ChatTwitter
 		}
 	}
 	
+	/**
+	 * sorts the hashmap
+	 * @return
+	 */
+	
 	private ArrayList<Map.Entry<String, Integer>> sortHashMap()
 	{
 		ArrayList<Map.Entry<String, Integer>> entries = new ArrayList<Map.Entry<String, Integer>>(wordsAndCount.entrySet());
@@ -219,6 +272,12 @@ public class ChatTwitter
 		
 		return entries;
 	}
+	
+	/**
+	 * gets most common word from the user
+	 * @param username
+	 * @return
+	 */
 	
 	public String getMostCommonWord(String username)
 	{
@@ -251,6 +310,10 @@ public class ChatTwitter
 	}
 
 
+	/**
+	 * just sorts the words that the user has said
+	 * @return
+	 */
 
 	private String sortedWords()
 	{
@@ -286,6 +349,12 @@ public class ChatTwitter
 		
 return allWords;
 	}
+	
+	/**
+	 * returns the twitter user timeline aka their twitter feed but in a text format
+	 * @param user
+	 * @return
+	 */
 	
 	public ResponseList<Status> findUserTL(String user)
 	{
