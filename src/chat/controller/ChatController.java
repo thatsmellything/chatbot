@@ -1,6 +1,6 @@
 package chat.controller;
 
-import chat.model.Chatbot;
+import chat.model.ChatBot;
 import chat.view.ChatFrame;
 import twitter4j.Paging;
 import twitter4j.ResponseList;
@@ -17,7 +17,7 @@ import chat.model.ChatTwitter;
 
 public class ChatController 
 {
-	private Chatbot simpleBot;
+	private ChatBot simpleBot;
 	private ChatTwitter myTwitter;
 	private ChatFrame appFrame;
 
@@ -29,7 +29,7 @@ public class ChatController
 	public ChatController() 
 	{
 		// Init the model before the view!
-		simpleBot = new Chatbot();
+		simpleBot = new ChatBot();
 		appFrame = new ChatFrame(this);
 		myTwitter = new ChatTwitter(this);
 	}
@@ -113,7 +113,7 @@ public class ChatController
 	 * @return
 	 */
 	
-	public Chatbot getChatbot() 
+	public ChatBot getChatbot() 
 	{
 		return simpleBot;
 	}

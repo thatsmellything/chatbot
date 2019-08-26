@@ -2,7 +2,7 @@ package chat.model;
 
 import java.util.ArrayList;
 
-public class Chatbot
+public class ChatBot
 {
 	// Data Members
 	private String currentUser;
@@ -12,7 +12,7 @@ public class Chatbot
 	private ArrayList<String> responseList;
 	private ArrayList<String> spookyList;
 	
-	public Chatbot()
+	public ChatBot()
 	{
 		// Constructors
 		this.currentUser = new String("Craig Johnson");
@@ -135,7 +135,7 @@ public class Chatbot
 	}
 	// Props to Brian for the framework of spookyChecker. Thanks Brian!
 	
-	public Chatbot(String content)
+	public ChatBot(String content)
 	{
 		this.content = content;
 	}
